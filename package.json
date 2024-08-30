@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/fira-code": "^0.2.3",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-community/netinfo": "11.3.1",
     "@react-native-voice/voice": "^3.2.4",
@@ -22,7 +23,8 @@
     "react-native-reanimated": "~3.10.1",
     "react-native-screens": "3.31.1",
     "react-native-tts": "^4.1.1",
-    "zustand": "^4.5.5"
+    "zustand": "^4.5.5",
+    "expo-font": "~12.0.9"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

@@ -1,20 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useFontLoading } from "@src/hooks";
+import { AppLoader } from "@src/screens";
+import { GetStarted } from "@src/screens/auth";
+import { useEffect, useState } from "react";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const { isLoadingFontComplete, loadResourcesAndDataAsync } = useFontLoading();
+  const [fontHasLoaded, setFontHasLoaded] = useState<boolean>(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      loadResourcesAndDataAsync();
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  return <>{isLoadingFontComplete ? <AppLoader /> : <GetStarted />}</>;
+}
