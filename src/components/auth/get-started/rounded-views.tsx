@@ -1,4 +1,4 @@
-import { RoundedView } from "@src/common";
+import { CircularView } from "@src/common/circular-container";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -9,34 +9,34 @@ export const RoundedViews: React.FC<{}> = () => {
   return (
     <>
       <View style={styles.roundedViewContainer}>
-        <RoundedView bgColor={colors.main}>
+        <CircularView bgColor={colors.main}>
           <MaterialCommunityIcons
             color={colors.white}
             size={moderateScale(30)}
             name='robot'
           />
-        </RoundedView>
-        <RoundedView bgColor={colors.darkGray}>
+        </CircularView>
+        <CircularView bgColor={colors.darkGray}>
           <MaterialCommunityIcons
             color={colors.white}
             size={moderateScale(30)}
             name='chat'
           />
-        </RoundedView>
-        <RoundedView bgColor={colors.lightGray}>
+        </CircularView>
+        <CircularView bgColor={colors.lightGray}>
           <MaterialCommunityIcons
             color={colors.white}
             size={moderateScale(30)}
             name='microphone'
           />
-        </RoundedView>
-        <RoundedView bgColor={colors.blue}>
+        </CircularView>
+        <CircularView bgColor={colors.blue}>
           <MaterialCommunityIcons
             color={colors.white}
             size={moderateScale(30)}
             name='airplane-takeoff'
           />
-        </RoundedView>
+        </CircularView>
       </View>
     </>
   );

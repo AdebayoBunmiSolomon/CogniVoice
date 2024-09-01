@@ -2,12 +2,12 @@ import { DVH, DVW } from "@src/resources/scaling";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-type roundedImageProps = {
+type circularViewProps = {
   children: React.ReactNode;
-  bgColor: `#${string}`;
+  bgColor?: `#${string}`;
 };
 
-export const RoundedView: React.FC<roundedImageProps> = ({
+export const CircularView: React.FC<circularViewProps> = ({
   children,
   bgColor,
 }) => {
@@ -26,8 +26,8 @@ export const RoundedView: React.FC<roundedImageProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: DVW(20),
-    height: DVH(10),
+    paddingHorizontal: DVW(4),
+    paddingVertical: DVH(2),
     borderRadius: 100,
     justifyContent: "center",
     alignItems: "center",

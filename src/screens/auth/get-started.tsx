@@ -10,7 +10,8 @@ import {
 import { DVH, moderateScale, verticalScale } from "@src/resources/scaling";
 import { colors } from "@src/resources/colors";
 import { RoundedViews } from "@src/components/auth/get-started";
-import { AnimatedObject } from "@src/common";
+import { AnimatedIconButton } from "@src/common/animated-object";
+import { AntDesign } from "@expo/vector-icons";
 
 export const GetStarted: React.FC<{}> = () => {
   return (
@@ -33,7 +34,18 @@ export const GetStarted: React.FC<{}> = () => {
           <RoundedViews />
         </View>
       </Screen>
-      <AnimatedObject style={styles.button} object={TouchableOpacity} />
+      <AnimatedIconButton
+        style={styles.button}
+        object={TouchableOpacity}
+        title='Get Started'
+        icon={
+          <AntDesign
+            color={colors.white}
+            size={moderateScale(30)}
+            name='arrowright'
+          />
+        }
+      />
     </ImageBackground>
   );
 };
@@ -55,10 +67,12 @@ const styles = StyleSheet.create({
   button: {
     width: "90%",
     height: DVH(7),
-    justifyContent: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
     bottom: verticalScale(20),
     backgroundColor: colors.main,
     borderRadius: moderateScale(10),
+    paddingHorizontal: moderateScale(5),
   },
 });
