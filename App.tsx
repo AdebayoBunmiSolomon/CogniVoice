@@ -9,7 +9,7 @@ export default function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       loadResourcesAndDataAsync();
-    }, 1000);
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
 

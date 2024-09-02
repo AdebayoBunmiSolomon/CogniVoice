@@ -12,7 +12,7 @@ export type AuthScreenProps<ScreenName extends keyof AuthStackParamList> =
   NativeStackScreenProps<AuthStackParamList, ScreenName>;
 
 //bottom tab-bar screen navigation
-export interface BottomTabStackParamList extends ParamListBase {
+export interface BottomTabBarStackParamList extends ParamListBase {
   Home: undefined;
   AIChat: undefined;
   History: undefined;
@@ -20,5 +20,5 @@ export interface BottomTabStackParamList extends ParamListBase {
 }
 
 export type BottomTabBarScreenProps<
-  ScreenName extends keyof BottomTabStackParamList
-> = BottomTabScreenProps<BottomTabStackParamList, ScreenName>;
+  ScreenName extends keyof BottomTabBarStackParamList
+> = BottomTabScreenProps<BottomTabBarStackParamList, ScreenName>;

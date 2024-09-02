@@ -15,6 +15,7 @@ type textProps = {
   main?: boolean;
   lightGray?: boolean;
   darkGray?: boolean;
+  gray?: boolean;
   blue?: boolean;
 };
 
@@ -30,6 +31,7 @@ export const SemiBoldText: React.FC<textProps> = ({
   main,
   lightGray,
   darkGray,
+  gray,
   blue,
 }) => {
   const { textSize, textColor } = useText();
@@ -40,7 +42,7 @@ export const SemiBoldText: React.FC<textProps> = ({
     sizeLarge,
     sizeXtraLarge
   );
-  const color = textColor(black, white, main, lightGray, darkGray, blue);
+  const color = textColor(black, white, main, lightGray, darkGray, blue, gray);
   return (
     <>
       <Text

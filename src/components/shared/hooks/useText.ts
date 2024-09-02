@@ -34,7 +34,8 @@ export const useText = () => {
     main?: boolean,
     lightGray?: boolean,
     darkGray?: boolean,
-    blue?: boolean
+    blue?: boolean,
+    gray?: boolean
   ) => {
     if (black) {
       return txtColors.black;
@@ -48,6 +49,8 @@ export const useText = () => {
       return txtColors.darkGray;
     } else if (blue) {
       return txtColors.blue;
+    } else if (gray) {
+      return txtColors.gray;
     }
   };
 

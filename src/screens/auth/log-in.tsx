@@ -8,7 +8,9 @@ import { BoldText, IconButton } from "@src/components";
 import { Fontisto } from "@expo/vector-icons";
 import { colors } from "@src/resources/colors";
 
-export const Login = ({}: AuthScreenProps<navigationNames.LOGIN>) => {
+export const Login = ({
+  navigation,
+}: AuthScreenProps<navigationNames.LOGIN>) => {
   return (
     <Screen>
       <View style={styles.container}>
@@ -45,7 +47,9 @@ export const Login = ({}: AuthScreenProps<navigationNames.LOGIN>) => {
           <IconButton
             titleType='regular'
             title='Continue with google'
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate(navigationNames.HOME);
+            }}
             textWhite
             bgMain
             icon={

@@ -15,7 +15,7 @@ type textProps = {
   main?: boolean;
   lightGray?: boolean;
   darkGray?: boolean;
-  cream?: boolean;
+  gray?: boolean;
   blue?: boolean;
 };
 
@@ -31,7 +31,7 @@ export const BoldText: React.FC<textProps> = ({
   main,
   lightGray,
   darkGray,
-  cream,
+  gray,
   blue,
 }) => {
   const { textSize, textColor } = useText();
@@ -42,7 +42,7 @@ export const BoldText: React.FC<textProps> = ({
     sizeLarge,
     sizeXtraLarge
   );
-  const color = textColor(black, white, main, lightGray, darkGray, blue);
+  const color = textColor(black, white, main, lightGray, darkGray, blue, gray);
   return (
     <>
       <Text

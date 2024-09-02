@@ -14,4 +14,5 @@ export enum txtColors {
   lightGray = "#d8d3e7",
   white = "#ffffff",
   blue = "#202058",
+  gray = "#3b36367f",
 }

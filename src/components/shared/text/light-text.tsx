@@ -16,7 +16,7 @@ type textProps = {
   lightGray?: boolean;
   darkGray?: boolean;
   blue?: boolean;
-  cream?: boolean;
+  gray?: boolean;
 };
 
 export const LightText: React.FC<textProps> = ({
@@ -32,7 +32,7 @@ export const LightText: React.FC<textProps> = ({
   lightGray,
   darkGray,
   blue,
-  cream,
+  gray,
 }) => {
   const { textSize, textColor } = useText();
   const size = textSize(
@@ -42,7 +42,7 @@ export const LightText: React.FC<textProps> = ({
     sizeLarge,
     sizeXtraLarge
   );
-  const color = textColor(black, white, main, lightGray, darkGray, blue);
+  const color = textColor(black, white, main, lightGray, darkGray, blue, gray);
   return (
     <>
       <Text

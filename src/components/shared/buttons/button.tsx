@@ -86,7 +86,6 @@ export const Button: React.FC<buttonProps> = ({
           main={textMain && textMain}
           lightGray={textLightGray && textLightGray}
           darkGray={textDarkGray && textDarkGray}
-          cream={textCream && textCream}
           blue={textBlue && textBlue}>
           {title ? title : "no-title"}
         </BoldText>
@@ -98,7 +97,6 @@ export const Button: React.FC<buttonProps> = ({
           main={textMain && textMain}
           lightGray={textLightGray && textLightGray}
           darkGray={textDarkGray && textDarkGray}
-          cream={textCream && textCream}
           blue={textBlue && textBlue}>
           {title ? title : "no-title"}
         </LightText>
@@ -110,7 +108,6 @@ export const Button: React.FC<buttonProps> = ({
           main={textMain && textMain}
           lightGray={textLightGray && textLightGray}
           darkGray={textDarkGray && textDarkGray}
-          cream={textCream && textCream}
           blue={textBlue && textBlue}>
           {title ? title : "no-title"}
         </MediumText>
@@ -122,7 +119,6 @@ export const Button: React.FC<buttonProps> = ({
           main={textMain && textMain}
           lightGray={textLightGray && textLightGray}
           darkGray={textDarkGray && textDarkGray}
-          cream={textCream && textCream}
           blue={textBlue && textBlue}>
           {title ? title : "no-title"}
         </RegularText>
@@ -137,7 +133,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: moderateScale(10),
-    width: "95%",
+    width: "100%",
     paddingVertical: Platform.OS === "ios" ? DVH(2) : DVH(1.5),
     alignSelf: "center",
     borderRadius: moderateScale(10),
