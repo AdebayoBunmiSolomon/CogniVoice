@@ -1,6 +1,6 @@
 import { useFontLoading } from "@src/hooks";
+import { Router } from "@src/router/router";
 import { AppLoader } from "@src/screens";
-import { GetStarted } from "@src/screens/auth";
 import { useEffect, useState } from "react";
 
 export default function App() {
@@ -13,5 +13,5 @@ export default function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  return <>{isLoadingFontComplete ? <AppLoader /> : <GetStarted />}</>;
+  return <>{isLoadingFontComplete ? <AppLoader /> : <Router />}</>;
 }

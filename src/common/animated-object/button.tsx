@@ -1,11 +1,11 @@
 import { RegularText } from "@src/components";
 import React, { useEffect, useState } from "react";
-import { ViewProps, ViewStyle } from "react-native";
+import { TouchableOpacityProps, ViewStyle } from "react-native";
 import Animated, { SlideInDown } from "react-native-reanimated";
 import { animationIn, animationOut } from "../services/animations";
 
 type animatedBtnProps = {
-  object: React.ComponentType<ViewProps>;
+  object: React.ComponentType<TouchableOpacityProps>;
   style: ViewStyle;
   animationTimer?: number;
   enteringAnimation?: keyof typeof animationIn;

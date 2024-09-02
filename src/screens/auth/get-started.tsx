@@ -12,8 +12,12 @@ import { colors } from "@src/resources/colors";
 import { RoundedViews } from "@src/components/auth/get-started";
 import { AnimatedIconButton } from "@src/common/animated-object";
 import { AntDesign } from "@expo/vector-icons";
+import { AuthScreenProps } from "@src/router/types";
+import { navigationNames } from "@src/navigation/navigation-names";
 
-export const GetStarted: React.FC<{}> = () => {
+export const GetStarted = ({
+  navigation,
+}: AuthScreenProps<navigationNames.GET_STARTED>) => {
   return (
     <ImageBackground
       source={require("@src/assets/get-started.jpg")}
@@ -45,6 +49,7 @@ export const GetStarted: React.FC<{}> = () => {
             name='arrowright'
           />
         }
+        onPress={() => navigation.navigate(navigationNames.LOGIN)}
       />
     </ImageBackground>
   );
@@ -70,8 +75,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    bottom: verticalScale(20),
     backgroundColor: colors.main,
+    bottom: verticalScale(20),
     borderRadius: moderateScale(10),
     paddingHorizontal: moderateScale(5),
   },

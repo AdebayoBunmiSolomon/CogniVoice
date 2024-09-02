@@ -16,6 +16,7 @@ type textProps = {
   lightGray?: boolean;
   darkGray?: boolean;
   blue?: boolean;
+  cream?: boolean;
 };
 
 export const RegularText: React.FC<textProps> = ({
@@ -31,6 +32,7 @@ export const RegularText: React.FC<textProps> = ({
   lightGray,
   darkGray,
   blue,
+  cream,
 }) => {
   const { textSize, textColor } = useText();
   const size = textSize(
