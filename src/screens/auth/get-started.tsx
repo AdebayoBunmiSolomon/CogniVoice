@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.6)", // Adjust the alpha for desired transparency
   },
   textContainer: {
-    gap: moderateScale(10),
+    gap: moderateScale(1),
   },
   button: {
     width: "90%",
