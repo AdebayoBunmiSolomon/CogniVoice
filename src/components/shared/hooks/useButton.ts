@@ -26,7 +26,6 @@ export const useButton = () => {
       return colors.blue;
     }
   };
-
   return {
     btnBgColor,
   };

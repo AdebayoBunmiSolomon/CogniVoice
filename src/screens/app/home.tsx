@@ -3,9 +3,9 @@ import React from "react";
 import { Screen } from "../screen";
 import { BottomTabBarScreenProps } from "@src/router/types";
 import { HeaderTitle, SubHeader } from "@src/common/header-title";
-import { CircularView } from "@src/common/circular-container";
-import { Image, Platform, StyleSheet, View, ScrollView } from "react-native";
-import { DVH, DVW, moderateScale, verticalScale } from "@src/resources/scaling";
+import { CircularLineView } from "@src/common/circular-container";
+import { Image, StyleSheet, View } from "react-native";
+import { DVH, moderateScale, verticalScale } from "@src/resources/scaling";
 import { colors } from "@src/resources/colors";
 import {
   BoldText,
@@ -17,25 +17,25 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { chatHistory } from "@src/constants/chat-history";
 import { exploreMore } from "@src/constants/explore-more";
+import { PromptList, VerticalScrollContainer } from "@src/components/core";
+import { promptList } from "@src/constants/prompt-list";
 
-export const Home = ({}: BottomTabBarScreenProps<navigationNames.HOME>) => {
+export const Home = ({
+  navigation,
+}: BottomTabBarScreenProps<navigationNames.HOME>) => {
   return (
     <>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          bottom: verticalScale(10),
-        }}>
+      <VerticalScrollContainer>
         <Screen>
           <View style={styles.headerContainer}>
             <HeaderTitle />
-            <CircularView bgColor={colors.main}>
+            <CircularLineView borderColor={colors.blue}>
               <Image
                 source={require("@src/assets/profile.png")}
                 style={styles.image}
                 resizeMode='center'
               />
-            </CircularView>
+            </CircularLineView>
           </View>
           <View style={styles.questionTextContainer}>
             <BoldText sizeBody black>
@@ -49,7 +49,6 @@ export const Home = ({}: BottomTabBarScreenProps<navigationNames.HOME>) => {
             title='New Chat'
             titleType='regular'
             textWhite
-            bgBlue
             icon={
               <AntDesign
                 name='wechat'
@@ -57,24 +56,30 @@ export const Home = ({}: BottomTabBarScreenProps<navigationNames.HOME>) => {
                 color={colors.white}
               />
             }
-            onPress={() => {}}
+            style={{
+              backgroundColor: colors.main,
+            }}
+            onPress={() => {
+              navigation.navigate(navigationNames.AI_CHAT);
+            }}
           />
           <SubHeader leftTextTitle='Chat History' rightTextTitle='Show all' />
           <ChatHistory data={chatHistory} />
           <SubHeader leftTextTitle='Explore more' rightTextTitle='show all' />
           <ExploreMore data={exploreMore} />
           <SubHeader leftTextTitle='Popular prompt' rightTextTitle='show all' />
-          <ExploreMore data={exploreMore} />
+          <PromptList data={promptList && promptList.slice(0, 4)} />
+          <PromptList data={promptList && promptList.slice(5, 9)} />
         </Screen>
-      </ScrollView>
+      </VerticalScrollContainer>
     </>
   );
 };
 
 const styles = StyleSheet.create({
   image: {
-    width: Platform.OS === "android" ? DVW(8) : DVW(10),
-    height: Platform.OS === "android" ? DVH(4) : DVH(5),
+    width: "100%",
+    height: "100%",
   },
   headerContainer: {
     marginBottom: DVH(0.07),

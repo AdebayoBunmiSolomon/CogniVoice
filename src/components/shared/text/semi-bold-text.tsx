@@ -62,5 +62,6 @@ export const SemiBoldText: React.FC<textProps> = ({
 const styles = StyleSheet.create({
   text: {
     fontFamily: fontFamily.semiBold,
+    textAlign: "justify",
   },
 });

@@ -71,9 +71,9 @@ export const Button: React.FC<buttonProps> = ({
     <TouchableOpacity
       onPress={onPress}
       style={[
-        styles.button || style,
+        styles.button,
         {
-          backgroundColor: bgColor,
+          backgroundColor: bgColor ? bgColor : style?.backgroundColor,
         },
       ]}>
       {isLoading ? (

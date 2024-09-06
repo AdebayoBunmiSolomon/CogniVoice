@@ -62,5 +62,6 @@ export const LightText: React.FC<textProps> = ({
 const styles = StyleSheet.create({
   text: {
     fontFamily: fontFamily.light,
+    textAlign: "justify",
   },
 });

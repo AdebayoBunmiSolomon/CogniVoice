@@ -62,5 +62,6 @@ export const BoldText: React.FC<textProps> = ({
 const styles = StyleSheet.create({
   text: {
     fontFamily: fontFamily.bold,
+    textAlign: "justify",
   },
 });

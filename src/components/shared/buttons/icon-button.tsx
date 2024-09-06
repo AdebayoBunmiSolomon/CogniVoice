@@ -73,9 +73,9 @@ export const IconButton: React.FC<iconButtonProps> = ({
     <TouchableOpacity
       onPress={onPress}
       style={[
-        styles.button || style,
+        styles.button,
         {
-          backgroundColor: bgColor,
+          backgroundColor: bgColor ? bgColor : style?.backgroundColor,
         },
       ]}>
       {isLoading ? (

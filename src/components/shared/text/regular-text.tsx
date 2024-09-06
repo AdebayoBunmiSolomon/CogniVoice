@@ -62,5 +62,6 @@ export const RegularText: React.FC<textProps> = ({
 const styles = StyleSheet.create({
   text: {
     fontFamily: fontFamily.regular,
+    textAlign: "justify",
   },
 });

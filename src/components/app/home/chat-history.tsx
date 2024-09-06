@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     backgroundColor: colors.darkGray,
-    paddingVertical: DVH(1.5),
+    paddingVertical: DVH(0.6),
     paddingHorizontal: DVW(4),
     borderRadius: moderateScale(20),
     marginRight: moderateScale(15),

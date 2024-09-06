@@ -9,10 +9,14 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
+  ImageSourcePropType,
 } from "react-native";
 
 type exploreMoreProps = {
-  data: any[];
+  data: {
+    description: string;
+    icon: ImageSourcePropType;
+  }[];
   bgColor?: `#${string}`;
 };
 
@@ -32,11 +36,7 @@ export const ExploreMore: React.FC<exploreMoreProps> = ({ data, bgColor }) => {
             ]}
             key={index}>
             <Image
-              source={
-                index === 0
-                  ? require("@src/assets/suggest.png")
-                  : require("@src/assets/readability.png")
-              }
+              source={item.icon}
               resizeMode='contain'
               style={styles.image}
             />
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: DVH(1.5),
     paddingHorizontal: DVW(1.5),
-    width: "49.1%",
+    width: "49.5%",
     borderRadius: moderateScale(10),
     gap: moderateScale(20),
     marginRight: moderateScale(5),

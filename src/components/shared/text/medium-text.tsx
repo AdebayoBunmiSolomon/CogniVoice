@@ -62,5 +62,6 @@ export const MediumText: React.FC<textProps> = ({
 const styles = StyleSheet.create({
   text: {
     fontFamily: fontFamily.medium,
+    textAlign: "justify",
   },
 });
