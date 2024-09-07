@@ -5,7 +5,7 @@ import { BottomTabBarScreenProps } from "@src/router/types";
 import { ScreenTitle } from "@src/common/header-title";
 import { Entypo } from "@expo/vector-icons";
 import { colors } from "@src/resources/colors";
-import { moderateScale } from "@src/resources/scaling";
+import { moderateScale, verticalScale } from "@src/resources/scaling";
 import { VerticalScrollContainer } from "@src/components/core";
 import {
   CircularIconButton,
@@ -35,9 +35,11 @@ export const AIChat = ({
               />
             }
           />
-          <SemiBoldText sizeMedium gray>
-            Features
-          </SemiBoldText>
+          <View style={styles.featureText}>
+            <SemiBoldText sizeMedium gray>
+              Features
+            </SemiBoldText>
+          </View>
           <Features data={aiChat} />
           <CircularIconButton
             onPress={() => {}}
@@ -67,5 +69,8 @@ export const AIChat = ({
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
+  },
+  featureText: {
+    paddingVertical: verticalScale(7),
   },
 });

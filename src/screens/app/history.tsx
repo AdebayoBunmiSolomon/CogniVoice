@@ -5,14 +5,15 @@ import { BottomTabBarScreenProps } from "@src/router/types";
 import { VerticalScrollContainer } from "@src/components/core";
 import { ScreenTitle } from "@src/common/header-title";
 import { SectionList, View, Text, StyleSheet } from "react-native";
-import { groupDataByDate } from "@src/helper/helper";
-import { format } from "date-fns";
+import { getDateTime, groupDataByDate } from "@src/helper/helper";
 
 const data = [
-  { id: 1, title: "Item 1", date: "2024-09-05T10:00:00Z" },
-  { id: 2, title: "Item 2", date: "2024-09-05T12:00:00Z" },
-  { id: 3, title: "Item 3", date: "2024-09-06T09:00:00Z" },
-  { id: 4, title: "Item 4", date: "2024-09-06T15:00:00Z" },
+  { id: 1, title: "Item 1", date: "2024-09-07" },
+  { id: 2, title: "Item 2", date: "2024-09-07" },
+  { id: 3, title: "Item 3", date: "2024-09-06" },
+  { id: 4, title: "Item 4", date: "2024-09-06" },
+  { id: 5, title: "Item 3", date: "2024-09-05" },
+  { id: 6, title: "Item 4", date: "2024-09-05" },
 ];
 
 export const History = ({
@@ -23,7 +24,7 @@ export const History = ({
 
   // Convert grouped data to the format required by SectionList
   const sections = Object.keys(groupedData).map((date) => ({
-    title: date, // Section header (date)
+    date: getDateTime(date), // Section header (date)
     data: groupedData[date], // Items for that date
   }));
   return (
@@ -42,11 +43,9 @@ export const History = ({
                 <Text>{item.title}</Text>
               </View>
             )}
-            renderSectionHeader={({ section: { title } }) => (
+            renderSectionHeader={({ section: { date } }) => (
               <View style={styles.header}>
-                <Text style={styles.headerText}>
-                  {format(new Date(title), "EEEE, MMMM d, yyyy")}
-                </Text>
+                <Text style={styles.headerText}>{date}</Text>
               </View>
             )}
           />
