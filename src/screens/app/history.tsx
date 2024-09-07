@@ -6,14 +6,21 @@ import { VerticalScrollContainer } from "@src/components/core";
 import { ScreenTitle } from "@src/common/header-title";
 import { SectionList, View, Text, StyleSheet } from "react-native";
 import { getDateTime, groupDataByDate } from "@src/helper/helper";
+import { RegularText, SemiBoldText } from "@src/components";
+import { moderateScale } from "@src/resources/scaling";
+import { colors } from "@src/resources/colors";
 
 const data = [
-  { id: 1, title: "Item 1", date: "2024-09-07" },
-  { id: 2, title: "Item 2", date: "2024-09-07" },
-  { id: 3, title: "Item 3", date: "2024-09-06" },
-  { id: 4, title: "Item 4", date: "2024-09-06" },
-  { id: 5, title: "Item 3", date: "2024-09-05" },
-  { id: 6, title: "Item 4", date: "2024-09-05" },
+  { id: 1, question: "Item 1", date: "2024-09-07" },
+  { id: 2, question: "Item 2", date: "2024-09-07" },
+  { id: 3, question: "Item 3", date: "2024-09-06" },
+  { id: 4, question: "Item 4", date: "2024-09-06" },
+  { id: 5, question: "Item 3", date: "2024-09-05" },
+  { id: 6, question: "Item 4", date: "2024-09-05" },
+  { id: 7, question: "Item 3", date: "2024-09-06" },
+  { id: 8, question: "Item 4", date: "2024-09-06" },
+  { id: 9, question: "Item 3", date: "2024-09-05" },
+  { id: 10, question: "Item 4", date: "2024-09-05" },
 ];
 
 export const History = ({
@@ -40,12 +47,16 @@ export const History = ({
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <View style={styles.item}>
-                <Text>{item.title}</Text>
+                <RegularText sizeSmall black>
+                  {item.question}
+                </RegularText>
               </View>
             )}
             renderSectionHeader={({ section: { date } }) => (
               <View style={styles.header}>
-                <Text style={styles.headerText}>{date}</Text>
+                <SemiBoldText sizeSmall gray>
+                  {date}
+                </SemiBoldText>
               </View>
             )}
           />
@@ -59,14 +70,13 @@ export const History = ({
 const styles = StyleSheet.create({
   header: {
     backgroundColor: "#f2f2f2",
-    padding: 10,
-  },
-  headerText: {
-    fontWeight: "bold",
+    padding: moderateScale(10),
   },
   item: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    paddingHorizontal: moderateScale(10),
+    paddingVertical: moderateScale(15),
+    marginBottom: moderateScale(10),
+    backgroundColor: colors.lightGray,
+    borderRadius: moderateScale(10),
   },
 });

@@ -5,4 +5,6 @@ export enum navigationNames {
   HISTORY = "HISTORY",
   AI_CHAT = "AI-CHAT",
   SETTINGS = "SETTINGS",
+  CHATTING = "CHATTING",
+  BOTTOM_TAB = "BOTTOM_TAB",
 }

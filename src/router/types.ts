@@ -22,3 +22,11 @@ export interface BottomTabBarStackParamList extends ParamListBase {
 export type BottomTabBarScreenProps<
   ScreenName extends keyof BottomTabBarStackParamList
 > = BottomTabScreenProps<BottomTabBarStackParamList, ScreenName>;
+
+//native and app screen navigation
+export interface RootStackParamList extends ParamListBase {
+  Chatting: undefined;
+}
+
+export type RootStackScreenProps<ScreenName extends keyof RootStackParamList> =
+  NativeStackScreenProps<RootStackParamList, ScreenName>;

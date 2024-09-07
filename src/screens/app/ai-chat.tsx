@@ -42,7 +42,9 @@ export const AIChat = ({
           </View>
           <Features data={aiChat} />
           <CircularIconButton
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate(navigationNames.CHATTING);
+            }}
             titleType='regular'
             style={{
               backgroundColor: colors.blue,

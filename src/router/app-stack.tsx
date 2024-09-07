@@ -1,101 +1,32 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React from "react";
-import { BottomTabBarStackParamList } from "./types";
-import { navigationNames } from "@src/navigation/navigation-names";
-import { bottomTabScreen } from "@src/navigation";
-import { DVH, moderateScale } from "@src/resources/scaling";
-import { RegularText } from "@src/components";
-import { Platform } from "react-native";
 import {
-  AntDesign,
-  MaterialCommunityIcons,
-  Octicons,
-  Ionicons,
-} from "@expo/vector-icons";
-import { colors } from "@src/resources/colors";
+  createNativeStackNavigator,
+  NativeStackNavigationOptions,
+} from "@react-navigation/native-stack";
+import { RootStackParamList } from "./types";
+import { appScreens } from "@src/navigation";
 
-const Tab = createBottomTabNavigator<BottomTabBarStackParamList>();
+const ScreenStack = createNativeStackNavigator<RootStackParamList>();
+const headerOptions: NativeStackNavigationOptions = { headerShown: false };
 
-const BottomTabStack = () => {
+const Screen = () => {
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarStyle: {
-          height: Platform.OS === "ios" ? DVH(10) : DVH(8),
-        },
-        headerShown: false,
-        tabBarLabel: ({ focused }) =>
-          focused ? (
-            <RegularText main>{route.name.toLowerCase()}</RegularText>
-          ) : (
-            <RegularText sizeSmall lightGray>
-              {route.name.toLowerCase()}
-            </RegularText>
-          ),
-        tabBarIcon: ({ focused }) =>
-          focused && route.name === navigationNames.HOME ? (
-            <AntDesign
-              name='home'
-              size={moderateScale(20)}
-              color={colors.main}
-            />
-          ) : !focused && route.name === navigationNames.HOME ? (
-            <AntDesign
-              name='home'
-              size={moderateScale(20)}
-              color={colors.darkGray}
-            />
-          ) : focused && route.name === navigationNames.AI_CHAT ? (
-            <MaterialCommunityIcons
-              name='robot'
-              size={moderateScale(20)}
-              color={colors.main}
-            />
-          ) : !focused && route.name === navigationNames.AI_CHAT ? (
-            <MaterialCommunityIcons
-              name='robot'
-              size={moderateScale(20)}
-              color={colors.darkGray}
-            />
-          ) : focused && route.name === navigationNames.HISTORY ? (
-            <Octicons name='log' size={moderateScale(20)} color={colors.main} />
-          ) : !focused && route.name === navigationNames.HISTORY ? (
-            <Octicons
-              name='log'
-              size={moderateScale(20)}
-              color={colors.darkGray}
-            />
-          ) : focused && route.name === navigationNames.SETTINGS ? (
-            <Ionicons
-              name='settings'
-              size={moderateScale(20)}
-              color={colors.main}
-            />
-          ) : !focused && route.name === navigationNames.SETTINGS ? (
-            <Ionicons
-              name='settings'
-              size={moderateScale(20)}
-              color={colors.darkGray}
-            />
-          ) : undefined,
-      })}
-      initialRouteName={navigationNames.HOME}>
-      {bottomTabScreen &&
-        bottomTabScreen.map((screen, index) => (
-          <Tab.Screen
+    <ScreenStack.Navigator screenOptions={headerOptions}>
+      {appScreens &&
+        appScreens.map((screen, index) => (
+          <ScreenStack.Screen
             name={screen.screenName}
-            component={screen.component}
             key={index}
+            component={screen.component}
           />
         ))}
-    </Tab.Navigator>
+    </ScreenStack.Navigator>
   );
 };
 
 export const AppStack = () => {
   return (
     <>
-      <BottomTabStack />
+      <Screen />
     </>
   );
 };

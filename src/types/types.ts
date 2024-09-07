@@ -1,4 +1,8 @@
-import { AuthStackParamList } from "@src/router/types";
+import {
+  RootStackParamList,
+  AuthStackParamList,
+  BottomTabBarStackParamList,
+} from "@src/router/types";
 import { ImageSourcePropType } from "react-native";
 
 export type authScreenTypes = {
@@ -7,7 +11,12 @@ export type authScreenTypes = {
 };
 
 export type bottomTabScreenTypes = {
-  screenName: keyof AuthStackParamList;
+  screenName: keyof BottomTabBarStackParamList;
+  component: React.ComponentType<any>;
+};
+
+export type appScreenTypes = {
+  screenName: keyof RootStackParamList;
   component: React.ComponentType<any>;
 };
 
