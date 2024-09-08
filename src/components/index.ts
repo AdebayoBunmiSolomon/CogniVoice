@@ -11,3 +11,5 @@ export * from "./shared/buttons/circular-icon-button";
 export * from "./app/home/chat-history";
 export * from "./app/home/explore-more";
 export * from "./app/ai-chat/features";
+export * from "./app/chatting/message-template";
+export * from "./app/chatting/message-actions";

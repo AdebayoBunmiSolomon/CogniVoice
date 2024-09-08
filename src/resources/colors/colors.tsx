@@ -5,6 +5,7 @@ export enum colors {
   white = "#ffffff",
   black = "#1A1110",
   blue = "#202058",
+  gray = "#3b36367f",
 }
 
 export enum txtColors {

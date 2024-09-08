@@ -59,7 +59,7 @@ export const AIChat = ({
           />
           <View style={styles.container}>
             <RegularText sizeBody black>
-              Speak now
+              Begin now
             </RegularText>
           </View>
         </Screen>

@@ -1,6 +1,6 @@
 import { fontFamily } from "@src/resources/fonts/font-family";
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View, ViewStyle } from "react-native";
 import { useText } from "../hooks";
 
 type textProps = {
@@ -17,6 +17,7 @@ type textProps = {
   darkGray?: boolean;
   blue?: boolean;
   gray?: boolean;
+  style?: ViewStyle;
 };
 
 export const MediumText: React.FC<textProps> = ({
@@ -33,6 +34,7 @@ export const MediumText: React.FC<textProps> = ({
   darkGray,
   blue,
   gray,
+  style,
 }) => {
   const { textSize, textColor } = useText();
   const size = textSize(
@@ -44,7 +46,7 @@ export const MediumText: React.FC<textProps> = ({
   );
   const color = textColor(black, white, main, lightGray, darkGray, blue, gray);
   return (
-    <>
+    <View style={style}>
       <Text
         style={[
           styles.text,
@@ -55,7 +57,7 @@ export const MediumText: React.FC<textProps> = ({
         ]}>
         {children && children}
       </Text>
-    </>
+    </View>
   );
 };
 
