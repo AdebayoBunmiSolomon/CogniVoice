@@ -11,36 +11,25 @@ export const useChatting = () => {
   };
 
   /**
-   * like a message to an array of message
+   * like or unlike a message to / from an array of message
    */
-  const likeMessage = (content: string) => {
+  const likeUnlikeMessage = (content: string) => {
     const msgExist = message.some((msgContent) => msgContent === content);
     if (msgExist) {
-      console.log("message already exists");
-    } else {
-      const updatedMessage = [...message, content];
-      setMessage(updatedMessage);
-    }
-  };
-
-  /**
-   * remove a message from an array of message
-   */
-  const unLikeMessage = (content: string) => {
-    const msgExist = message.some((msgContent) => msgContent === content);
-    if (msgExist) {
+      //remove from message
       const updatedMessage = message.filter(
         (msgContent) => msgContent !== content
       );
       setMessage(updatedMessage);
     } else {
-      console.log("message does not exists");
+      //add to message
+      const updatedMessage = [...message, content];
+      setMessage(updatedMessage);
     }
   };
 
   return {
     copyTextToClipBoard,
-    likeMessage,
-    unLikeMessage,
+    likeUnlikeMessage,
   };
 };

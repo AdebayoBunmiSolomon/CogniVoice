@@ -5,19 +5,20 @@ import { DVH, DVW, moderateScale, verticalScale } from "@src/resources/scaling";
 import React from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { MessageAction } from "./message-actions";
+import { useMessageStore } from "@src/services/store/useMessageStore";
 
 type userMsgProps = {
   content: string;
   copyToClipBoard: () => void;
-  likeMsg: () => void;
-  unLikeMsg: () => void;
+  likeUnlikeMsg: () => void;
+  // unLikeMsg: () => void;
 };
 
 type aiTxtMsgProps = {
   content: string;
   copyToClipBoard: () => void;
-  likeMsg: () => void;
-  unLikeMsg: () => void;
+  likeUnlikeMsg: () => void;
+  // unLikeMsg: () => void;
 };
 
 type aiImgMsgProps = {
@@ -27,9 +28,10 @@ type aiImgMsgProps = {
 export const UserMessage: React.FC<userMsgProps> = ({
   content,
   copyToClipBoard,
-  likeMsg,
-  unLikeMsg,
+  likeUnlikeMsg,
+  // unLikeMsg,
 }) => {
+  const { message } = useMessageStore();
   return (
     <View style={styles.userMsg}>
       <View style={styles.userMsgContent}>
@@ -45,15 +47,25 @@ export const UserMessage: React.FC<userMsgProps> = ({
             {content}
           </RegularText>
         </View>
-        <MessageAction
-          likeIconName={"like2"}
-          disLikeIconName={"dislike2"}
-          iconColor={colors.gray}
-          msgRoleType='user'
-          copyToClipBoard={() => copyToClipBoard()}
-          likeMsg={() => likeMsg()}
-          unLikeMsg={() => unLikeMsg()}
-        />
+        {message.some((msgContent) => msgContent === content) ? (
+          //message already liked
+          <MessageAction
+            iconName={"dislike1"}
+            iconColor={colors.gray}
+            msgRoleType='user'
+            copyToClipBoard={() => copyToClipBoard()}
+            likeUnlikeMsg={() => likeUnlikeMsg()}
+          />
+        ) : (
+          //message not already liked
+          <MessageAction
+            iconName={"like2"}
+            iconColor={colors.gray}
+            msgRoleType='user'
+            copyToClipBoard={() => copyToClipBoard()}
+            likeUnlikeMsg={() => likeUnlikeMsg()}
+          />
+        )}
       </View>
     </View>
   );
@@ -62,9 +74,10 @@ export const UserMessage: React.FC<userMsgProps> = ({
 export const AITextMessage: React.FC<aiTxtMsgProps> = ({
   content,
   copyToClipBoard,
-  likeMsg,
-  unLikeMsg,
+  likeUnlikeMsg,
+  // unLikeMsg,
 }) => {
+  const { message } = useMessageStore();
   return (
     <View style={styles.assistantMsg}>
       <View style={styles.assistantMsgContent}>
@@ -80,15 +93,25 @@ export const AITextMessage: React.FC<aiTxtMsgProps> = ({
             {content}
           </RegularText>
         </View>
-        <MessageAction
-          likeIconName={"like2"}
-          disLikeIconName={"dislike2"}
-          iconColor={colors.white}
-          msgRoleType='ai'
-          copyToClipBoard={() => copyToClipBoard()}
-          likeMsg={() => likeMsg()}
-          unLikeMsg={() => unLikeMsg()}
-        />
+        {message.some((msgContent) => msgContent === content) ? (
+          //message already liked
+          <MessageAction
+            iconName={"dislike1"}
+            iconColor={colors.white}
+            msgRoleType='ai'
+            copyToClipBoard={() => copyToClipBoard()}
+            likeUnlikeMsg={() => likeUnlikeMsg()}
+          />
+        ) : (
+          //message not already liked
+          <MessageAction
+            iconName={"like2"}
+            iconColor={colors.white}
+            msgRoleType='ai'
+            copyToClipBoard={() => copyToClipBoard()}
+            likeUnlikeMsg={() => likeUnlikeMsg()}
+          />
+        )}
       </View>
     </View>
   );

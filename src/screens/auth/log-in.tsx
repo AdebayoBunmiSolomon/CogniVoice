@@ -7,10 +7,12 @@ import { DVH, DVW, moderateScale } from "@src/resources/scaling";
 import { BoldText, IconButton } from "@src/components";
 import { Fontisto } from "@expo/vector-icons";
 import { colors } from "@src/resources/colors";
+import { useIsAuthenticatedStore } from "@src/services/store/useAuthenticationStore";
 
 export const Login = ({
   navigation,
 }: AuthScreenProps<navigationNames.LOGIN>) => {
+  const { setIsAuthenticated } = useIsAuthenticatedStore();
   return (
     <Screen>
       <View style={styles.container}>
@@ -33,7 +35,9 @@ export const Login = ({
           <IconButton
             titleType='regular'
             title='Continue with facebook'
-            onPress={() => {}}
+            onPress={() => {
+              setIsAuthenticated(true);
+            }}
             textWhite
             bgBlue
             icon={
@@ -48,7 +52,7 @@ export const Login = ({
             titleType='regular'
             title='Continue with google'
             onPress={() => {
-              navigation.navigate(navigationNames.HOME);
+              setIsAuthenticated(true);
             }}
             textWhite
             bgMain

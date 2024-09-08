@@ -6,22 +6,22 @@ import { moderateScale } from "@src/resources/scaling";
 
 type messageActionProps = {
   iconColor: string;
-  likeIconName: string;
-  disLikeIconName: string;
+  iconName: string;
+  // disLikeIconName: string;
   msgRoleType: "ai" | "user";
   copyToClipBoard: () => void;
-  likeMsg: () => void;
-  unLikeMsg: () => void;
+  likeUnlikeMsg: () => void;
+  // unLikeMsg: () => void;
 };
 
 export const MessageAction: React.FC<messageActionProps> = ({
   iconColor,
   msgRoleType,
   copyToClipBoard,
-  likeMsg,
-  unLikeMsg,
-  likeIconName,
-  disLikeIconName,
+  likeUnlikeMsg,
+  // unLikeMsg,
+  iconName,
+  // disLikeIconName,
 }) => {
   return (
     <View style={styles.container}>
@@ -44,20 +44,20 @@ export const MessageAction: React.FC<messageActionProps> = ({
         )}
       </View>
       <View style={styles.likeContainer}>
-        <TouchableOpacity onPress={likeMsg}>
+        <TouchableOpacity onPress={likeUnlikeMsg}>
           <AntDesign
-            name={likeIconName}
+            name={iconName}
             color={iconColor}
             size={moderateScale(20)}
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={unLikeMsg}>
+        {/* <TouchableOpacity onPress={likeUnlikeMsg}>
           <AntDesign
             name={disLikeIconName}
             color={iconColor}
             size={moderateScale(20)}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );

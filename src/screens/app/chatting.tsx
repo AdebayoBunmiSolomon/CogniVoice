@@ -18,7 +18,7 @@ export const Chatting = ({
   const [messages, setMessages] = useState<any[]>(dummyMessages);
   const { message } = useMessageStore();
   console.log(message);
-  const { copyTextToClipBoard, likeMessage, unLikeMessage } = useChatting();
+  const { copyTextToClipBoard, likeUnlikeMessage } = useChatting();
   return (
     <Screen>
       <ScreenTitle
@@ -57,11 +57,8 @@ export const Chatting = ({
                       copyToClipBoard={() =>
                         copyTextToClipBoard(message.content)
                       }
-                      likeMsg={() => {
-                        likeMessage(message.content);
-                      }}
-                      unLikeMsg={() => {
-                        unLikeMessage(message.content);
+                      likeUnlikeMsg={() => {
+                        likeUnlikeMessage(message.content);
                       }}
                     />
                   );
@@ -73,11 +70,8 @@ export const Chatting = ({
                     content={message.content}
                     key={index}
                     copyToClipBoard={() => copyTextToClipBoard(message.content)}
-                    likeMsg={() => {
-                      likeMessage(message.content);
-                    }}
-                    unLikeMsg={() => {
-                      unLikeMessage(message.content);
+                    likeUnlikeMsg={() => {
+                      likeUnlikeMessage(message.content);
                     }}
                   />
                 );

@@ -3,14 +3,16 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { AppStack } from "./app-stack";
 import { AuthStack } from "./auth-stack";
+import { useIsAuthenticatedStore } from "@src/services/store/useAuthenticationStore";
 
 export const Router = () => {
-  const isAuthenticated: boolean = true;
+  const { isAuthenticated } = useIsAuthenticatedStore();
+  const authenticated = isAuthenticated;
   return (
     <>
       <NavigationContainer>
         <StatusBar style='dark' />
-        {isAuthenticated ? <AppStack /> : <AuthStack />}
+        {authenticated ? <AppStack /> : <AuthStack />}
       </NavigationContainer>
     </>
   );
