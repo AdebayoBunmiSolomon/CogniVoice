@@ -3,9 +3,16 @@ import { RegularText } from "@src/components/shared/text/regular-text";
 import { colors } from "@src/resources/colors";
 import { DVH, DVW, moderateScale, verticalScale } from "@src/resources/scaling";
 import React from "react";
-import { StyleSheet, View, Image } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { MessageAction } from "./message-actions";
 import { useMessageStore } from "@src/services/store/useMessageStore";
+import { useChatting } from "@src/services/hooks";
+import ImageView from "react-native-image-viewing";
 
 type userMsgProps = {
   content: string;
@@ -32,6 +39,7 @@ export const UserMessage: React.FC<userMsgProps> = ({
   // unLikeMsg,
 }) => {
   const { message } = useMessageStore();
+  const isMsgLiked = message.some((msgContent) => msgContent === content);
   return (
     <View style={styles.userMsg}>
       <View style={styles.userMsgContent}>
@@ -47,25 +55,13 @@ export const UserMessage: React.FC<userMsgProps> = ({
             {content}
           </RegularText>
         </View>
-        {message.some((msgContent) => msgContent === content) ? (
-          //message already liked
-          <MessageAction
-            iconName={"dislike1"}
-            iconColor={colors.gray}
-            msgRoleType='user'
-            copyToClipBoard={() => copyToClipBoard()}
-            likeUnlikeMsg={() => likeUnlikeMsg()}
-          />
-        ) : (
-          //message not already liked
-          <MessageAction
-            iconName={"like2"}
-            iconColor={colors.gray}
-            msgRoleType='user'
-            copyToClipBoard={() => copyToClipBoard()}
-            likeUnlikeMsg={() => likeUnlikeMsg()}
-          />
-        )}
+        <MessageAction
+          iconName={isMsgLiked ? "dislike1" : "like2"}
+          iconColor={colors.gray}
+          msgRoleType='user'
+          copyToClipBoard={() => copyToClipBoard()}
+          likeUnlikeMsg={() => likeUnlikeMsg()}
+        />
       </View>
     </View>
   );
@@ -78,6 +74,7 @@ export const AITextMessage: React.FC<aiTxtMsgProps> = ({
   // unLikeMsg,
 }) => {
   const { message } = useMessageStore();
+  const isMsgLiked = message.some((msgContent) => msgContent === content);
   return (
     <View style={styles.assistantMsg}>
       <View style={styles.assistantMsgContent}>
@@ -93,48 +90,44 @@ export const AITextMessage: React.FC<aiTxtMsgProps> = ({
             {content}
           </RegularText>
         </View>
-        {message.some((msgContent) => msgContent === content) ? (
-          //message already liked
-          <MessageAction
-            iconName={"dislike1"}
-            iconColor={colors.white}
-            msgRoleType='ai'
-            copyToClipBoard={() => copyToClipBoard()}
-            likeUnlikeMsg={() => likeUnlikeMsg()}
-          />
-        ) : (
-          //message not already liked
-          <MessageAction
-            iconName={"like2"}
-            iconColor={colors.white}
-            msgRoleType='ai'
-            copyToClipBoard={() => copyToClipBoard()}
-            likeUnlikeMsg={() => likeUnlikeMsg()}
-          />
-        )}
+        <MessageAction
+          iconName={isMsgLiked ? "dislike1" : "like2"}
+          iconColor={colors.white}
+          msgRoleType='ai'
+          copyToClipBoard={() => copyToClipBoard()}
+          likeUnlikeMsg={() => likeUnlikeMsg()}
+        />
       </View>
     </View>
   );
 };
 
 export const AIImageMessage: React.FC<aiImgMsgProps> = ({ content }) => {
+  const { openToViewImg, visible, setVisible, images, setImages } =
+    useChatting();
   return (
-    <View style={styles.assistantMsg}>
-      <View style={styles.assistantMsgContentImgContainer}>
-        <Image
-          source={{ uri: content }}
-          resizeMode='cover'
-          style={styles.assistantMsgContentImg}
-        />
-        {/* <CircularLineView borderColor={colors.white}>
-          <Image
-            source={require("@src/assets/businessman.png")}
-            resizeMode='contain'
-            style={styles.image}
-          />
-        </CircularLineView> */}
+    <>
+      <View style={styles.assistantMsg}>
+        <View style={styles.assistantMsgContentImgContainer}>
+          <TouchableWithoutFeedback onPress={() => openToViewImg(content)}>
+            <Image
+              source={{ uri: content }}
+              resizeMode='cover'
+              style={styles.assistantMsgContentImg}
+            />
+          </TouchableWithoutFeedback>
+        </View>
       </View>
-    </View>
+      <ImageView
+        images={images}
+        imageIndex={0}
+        visible={visible}
+        onRequestClose={() => {
+          setVisible(!visible);
+          setImages([]);
+        }}
+      />
+    </>
   );
 };
 
@@ -194,4 +187,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+  // likeContainer: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   gap: ''
+  // }
 });

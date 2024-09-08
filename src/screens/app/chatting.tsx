@@ -20,38 +20,54 @@ export const Chatting = ({
   console.log(message);
   const { copyTextToClipBoard, likeUnlikeMessage } = useChatting();
   return (
-    <Screen>
-      <ScreenTitle
-        title='Chats'
-        bckBtnOnPress={() => navigation.navigate(navigationNames.BOTTOM_TAB)}
-        rightIcon={
-          <AntDesign
-            name='wechat'
-            size={moderateScale(20)}
-            color={colors.black}
-          />
-        }
-      />
-      {messages.length > 0 ? (
-        <View style={styles.msgContainer}>
-          <ScrollView
-            bounces={false}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{
-              flexGrow: 1,
-              padding: moderateScale(10),
-            }}>
-            {messages.map((message, index) => {
-              if (message.role === "assistant") {
-                if (message.content.includes("https")) {
-                  //it's an ai image
-                  return (
-                    <AIImageMessage content={message.content} key={index} />
-                  );
+    <>
+      <Screen>
+        <ScreenTitle
+          title='Chats'
+          bckBtnOnPress={() => navigation.navigate(navigationNames.BOTTOM_TAB)}
+          rightIcon={
+            <AntDesign
+              name='wechat'
+              size={moderateScale(20)}
+              color={colors.black}
+            />
+          }
+        />
+        {messages.length > 0 ? (
+          <View style={styles.msgContainer}>
+            <ScrollView
+              bounces={false}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={{
+                flexGrow: 1,
+                padding: moderateScale(10),
+              }}>
+              {messages.map((message, index) => {
+                if (message.role === "assistant") {
+                  if (message.content.includes("https")) {
+                    //it's an ai image
+                    return (
+                      <AIImageMessage content={message.content} key={index} />
+                    );
+                  } else {
+                    //text message
+                    return (
+                      <AITextMessage
+                        content={message.content}
+                        key={index}
+                        copyToClipBoard={() =>
+                          copyTextToClipBoard(message.content)
+                        }
+                        likeUnlikeMsg={() => {
+                          likeUnlikeMessage(message.content);
+                        }}
+                      />
+                    );
+                  }
                 } else {
-                  //text message
+                  //user message
                   return (
-                    <AITextMessage
+                    <UserMessage
                       content={message.content}
                       key={index}
                       copyToClipBoard={() =>
@@ -63,24 +79,12 @@ export const Chatting = ({
                     />
                   );
                 }
-              } else {
-                //user message
-                return (
-                  <UserMessage
-                    content={message.content}
-                    key={index}
-                    copyToClipBoard={() => copyTextToClipBoard(message.content)}
-                    likeUnlikeMsg={() => {
-                      likeUnlikeMessage(message.content);
-                    }}
-                  />
-                );
-              }
-            })}
-          </ScrollView>
-        </View>
-      ) : null}
-    </Screen>
+              })}
+            </ScrollView>
+          </View>
+        ) : null}
+      </Screen>
+    </>
   );
 };
 
