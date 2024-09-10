@@ -6,59 +6,56 @@ import { moderateScale } from "@src/resources/scaling";
 
 type messageActionProps = {
   iconColor: string;
-  iconName: string;
-  // disLikeIconName: string;
+  leftIconName?: string;
+  rightIconName?: string;
   msgRoleType: "ai" | "user";
-  copyToClipBoard: () => void;
-  likeUnlikeMsg: () => void;
-  // unLikeMsg: () => void;
+  leftAction?: () => void;
+  rightAction?: () => void;
+  leftActionTitle?: string;
 };
 
 export const MessageAction: React.FC<messageActionProps> = ({
   iconColor,
   msgRoleType,
-  copyToClipBoard,
-  likeUnlikeMsg,
-  // unLikeMsg,
-  iconName,
-  // disLikeIconName,
+  leftAction,
+  rightAction,
+  leftActionTitle,
+  leftIconName,
+  rightIconName,
 }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.copyContainer}>
-        <TouchableOpacity onPress={copyToClipBoard}>
-          <Ionicons
-            name='copy-outline'
-            size={moderateScale(20)}
-            color={iconColor}
-          />
-        </TouchableOpacity>
-        {msgRoleType === "ai" ? (
-          <LightText sizeSmall white>
-            copy text
-          </LightText>
-        ) : (
-          <LightText sizeSmall gray>
-            copy text
-          </LightText>
-        )}
-      </View>
-      <View style={styles.likeContainer}>
-        <TouchableOpacity onPress={likeUnlikeMsg}>
-          <AntDesign
-            name={iconName}
-            color={iconColor}
-            size={moderateScale(20)}
-          />
-        </TouchableOpacity>
-        {/* <TouchableOpacity onPress={likeUnlikeMsg}>
-          <AntDesign
-            name={disLikeIconName}
-            color={iconColor}
-            size={moderateScale(20)}
-          />
-        </TouchableOpacity> */}
-      </View>
+      {leftAction && (
+        <View style={styles.copyContainer}>
+          <TouchableOpacity onPress={leftAction}>
+            <Ionicons
+              name={leftIconName}
+              size={moderateScale(20)}
+              color={iconColor}
+            />
+          </TouchableOpacity>
+          {msgRoleType === "ai" ? (
+            <LightText sizeSmall white>
+              {leftActionTitle}
+            </LightText>
+          ) : (
+            <LightText sizeSmall gray>
+              {leftActionTitle}
+            </LightText>
+          )}
+        </View>
+      )}
+      {rightAction && (
+        <View style={styles.likeContainer}>
+          <TouchableOpacity onPress={rightAction}>
+            <AntDesign
+              name={rightIconName}
+              color={iconColor}
+              size={moderateScale(20)}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 };

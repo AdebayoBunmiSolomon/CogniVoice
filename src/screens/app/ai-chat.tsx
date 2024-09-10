@@ -14,7 +14,7 @@ import {
   SemiBoldText,
 } from "@src/components";
 import { aiChat } from "@src/constants/ai-chat";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { StyleSheet, View } from "react-native";
 
 export const AIChat = ({
@@ -41,26 +41,43 @@ export const AIChat = ({
             </SemiBoldText>
           </View>
           <Features data={aiChat} />
-          <CircularIconButton
-            onPress={() => {
-              navigation.navigate(navigationNames.CHATTING);
-            }}
-            titleType='regular'
-            style={{
-              backgroundColor: colors.blue,
-            }}
-            icon={
-              <FontAwesome
-                name='microphone'
-                size={moderateScale(20)}
-                color={colors.white}
+          <View style={styles.bottomBtnContainer}>
+            <View>
+              <CircularIconButton
+                onPress={() => {
+                  navigation.navigate(navigationNames.VOICE_CHATTING);
+                }}
+                titleType='regular'
+                style={{
+                  backgroundColor: colors.blue,
+                }}
+                icon={
+                  <FontAwesome
+                    name='microphone'
+                    size={moderateScale(20)}
+                    color={colors.white}
+                  />
+                }
               />
-            }
-          />
-          <View style={styles.container}>
-            <RegularText sizeBody black>
-              Begin now
-            </RegularText>
+            </View>
+            <View>
+              <CircularIconButton
+                onPress={() => {
+                  navigation.navigate(navigationNames.VOICE_CHATTING);
+                }}
+                titleType='regular'
+                style={{
+                  backgroundColor: colors.blue,
+                }}
+                icon={
+                  <Ionicons
+                    name='chatbox-ellipses-outline'
+                    size={moderateScale(20)}
+                    color={colors.white}
+                  />
+                }
+              />
+            </View>
           </View>
         </Screen>
       </VerticalScrollContainer>
@@ -74,5 +91,11 @@ const styles = StyleSheet.create({
   },
   featureText: {
     paddingVertical: verticalScale(7),
+  },
+  bottomBtnContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: moderateScale(20),
   },
 });

@@ -12,9 +12,9 @@ import { AIImageMessage, AITextMessage, UserMessage } from "@src/components";
 import { useChatting } from "@src/services/hooks";
 import { useMessageStore } from "@src/services/store/useMessageStore";
 
-export const Chatting = ({
+export const VoiceChatting = ({
   navigation,
-}: RootStackScreenProps<navigationNames.CHATTING>) => {
+}: RootStackScreenProps<navigationNames.VOICE_CHATTING>) => {
   const [messages, setMessages] = useState<any[]>(dummyMessages);
   const { message } = useMessageStore();
   console.log(message);

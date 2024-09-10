@@ -1,6 +1,6 @@
 import { appScreenTypes } from "@src/types/types";
 import { navigationNames } from "./navigation-names";
-import { Chatting } from "@src/screens/app";
+import { VoiceChatting } from "@src/screens/app";
 import { BottomTabStack } from "@src/router/bottom-tab";
 
 export const appScreens: appScreenTypes[] = [
@@ -9,7 +9,7 @@ export const appScreens: appScreenTypes[] = [
     component: BottomTabStack,
   },
   {
-    screenName: navigationNames.CHATTING,
-    component: Chatting,
+    screenName: navigationNames.VOICE_CHATTING,
+    component: VoiceChatting,
   },
 ];

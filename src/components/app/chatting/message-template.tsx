@@ -11,9 +11,8 @@ import {
 } from "react-native";
 import { MessageAction } from "./message-actions";
 import { useMessageStore } from "@src/services/store/useMessageStore";
-import { useChatting } from "@src/services/hooks";
+import { useChatting, useMessageTemplate } from "@src/services/hooks";
 import ImageView from "react-native-image-viewing";
-import Svg, { Path } from "react-native-svg";
 
 type userMsgProps = {
   content: string;
@@ -44,15 +43,6 @@ export const UserMessage: React.FC<userMsgProps> = ({
   return (
     <View style={styles.userMsg}>
       <View style={styles.userMsgContent}>
-        <Svg
-          height='100%'
-          width='100%'
-          style={{ position: "absolute", top: 0, right: 0, zIndex: 1 }}>
-          <Path
-            d='M0,0 L100,0 L100,100 Z' // Triangle path
-            fill={colors.lightGray} // Match the message background
-          />
-        </Svg>
         <View style={styles.subContent}>
           <CircularLineView borderColor={colors.blue}>
             <Image
@@ -66,11 +56,13 @@ export const UserMessage: React.FC<userMsgProps> = ({
           </RegularText>
         </View>
         <MessageAction
-          iconName={isMsgLiked ? "dislike1" : "like2"}
+          leftIconName={"copy-outline"}
+          rightIconName={isMsgLiked ? "dislike1" : "like2"}
           iconColor={colors.gray}
           msgRoleType='user'
-          copyToClipBoard={() => copyToClipBoard()}
-          likeUnlikeMsg={() => likeUnlikeMsg()}
+          leftAction={() => copyToClipBoard()}
+          rightAction={() => likeUnlikeMsg()}
+          leftActionTitle='copy text'
         />
       </View>
     </View>
@@ -101,11 +93,13 @@ export const AITextMessage: React.FC<aiTxtMsgProps> = ({
           </RegularText>
         </View>
         <MessageAction
-          iconName={isMsgLiked ? "dislike1" : "like2"}
+          leftIconName={"copy-outline"}
+          rightIconName={isMsgLiked ? "dislike1" : "like2"}
           iconColor={colors.white}
           msgRoleType='ai'
-          copyToClipBoard={() => copyToClipBoard()}
-          likeUnlikeMsg={() => likeUnlikeMsg()}
+          leftAction={() => copyToClipBoard()}
+          rightAction={() => likeUnlikeMsg()}
+          leftActionTitle='copy text'
         />
       </View>
     </View>
@@ -115,6 +109,7 @@ export const AITextMessage: React.FC<aiTxtMsgProps> = ({
 export const AIImageMessage: React.FC<aiImgMsgProps> = ({ content }) => {
   const { openToViewImg, visible, setVisible, images, setImages } =
     useChatting();
+  const { shareHttpUrl } = useMessageTemplate();
   return (
     <>
       <View style={styles.assistantMsg}>
@@ -126,6 +121,20 @@ export const AIImageMessage: React.FC<aiImgMsgProps> = ({ content }) => {
               style={styles.assistantMsgContentImg}
             />
           </TouchableWithoutFeedback>
+          <View
+            style={{
+              marginVertical: moderateScale(5),
+              alignSelf: "flex-end",
+            }}>
+            <MessageAction
+              rightIconName={"sharealt"}
+              iconColor={colors.white}
+              msgRoleType='ai'
+              rightAction={() => {
+                shareHttpUrl(content);
+              }}
+            />
+          </View>
         </View>
       </View>
       <ImageView
@@ -182,7 +191,7 @@ const styles = StyleSheet.create({
   assistantMsgContentImgContainer: {
     backgroundColor: colors.blue,
     width: DVW(90),
-    height: DVH(45),
+    height: DVH(50),
     padding: moderateScale(10),
     marginBottom: verticalScale(10),
     borderBottomLeftRadius: moderateScale(10),
@@ -191,7 +200,7 @@ const styles = StyleSheet.create({
   },
   assistantMsgContentImg: {
     width: "100%",
-    height: "100%",
+    height: "95%",
   },
   image: {
     width: "100%",
