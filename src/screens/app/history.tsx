@@ -11,6 +11,7 @@ import { moderateScale } from "@src/resources/scaling";
 import { colors } from "@src/resources/colors";
 import { history } from "@src/constants/history";
 import { useHistory } from "@src/services/hooks";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 export const History = ({
   navigation,
@@ -32,6 +33,11 @@ export const History = ({
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <View style={styles.item}>
+                <Ionicons
+                  name='chatbox-ellipses-outline'
+                  size={moderateScale(20)}
+                  color={colors.black}
+                />
                 <RegularText sizeSmall black>
                   {item.question}
                 </RegularText>
@@ -63,5 +69,8 @@ const styles = StyleSheet.create({
     marginBottom: moderateScale(10),
     backgroundColor: colors.lightGray,
     borderRadius: moderateScale(10),
+    flexDirection: "row",
+    alignItems: "center",
+    gap: moderateScale(10),
   },
 });

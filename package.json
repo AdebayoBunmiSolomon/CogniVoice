@@ -27,6 +27,7 @@
     "react-native-image-viewing": "^0.2.2",
     "react-native-reanimated": "~3.10.1",
     "react-native-screens": "3.31.1",
+    "react-native-svg": "^15.6.0",
     "react-native-tts": "^4.1.1",
     "zustand": "^4.5.5"
   },

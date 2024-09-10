@@ -13,6 +13,7 @@ import { MessageAction } from "./message-actions";
 import { useMessageStore } from "@src/services/store/useMessageStore";
 import { useChatting } from "@src/services/hooks";
 import ImageView from "react-native-image-viewing";
+import Svg, { Path } from "react-native-svg";
 
 type userMsgProps = {
   content: string;
@@ -43,6 +44,15 @@ export const UserMessage: React.FC<userMsgProps> = ({
   return (
     <View style={styles.userMsg}>
       <View style={styles.userMsgContent}>
+        <Svg
+          height='100%'
+          width='100%'
+          style={{ position: "absolute", top: 0, right: 0, zIndex: 1 }}>
+          <Path
+            d='M0,0 L100,0 L100,100 Z' // Triangle path
+            fill={colors.lightGray} // Match the message background
+          />
+        </Svg>
         <View style={styles.subContent}>
           <CircularLineView borderColor={colors.blue}>
             <Image
