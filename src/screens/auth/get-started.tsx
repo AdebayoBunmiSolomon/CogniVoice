@@ -13,11 +13,11 @@ import { RoundedViews } from "@src/components/auth/get-started";
 import { AnimatedIconButton } from "@src/common/animated-object";
 import { AntDesign } from "@expo/vector-icons";
 import { AuthScreenProps } from "@src/router/types";
-import { navigationNames } from "@src/navigation/navigation-names";
+import { screenNames } from "@src/navigation/navigation-names";
 
 export const GetStarted = ({
   navigation,
-}: AuthScreenProps<navigationNames.GET_STARTED>) => {
+}: AuthScreenProps<screenNames.GET_STARTED>) => {
   return (
     <ImageBackground
       source={require("@src/assets/get-started.jpg")}
@@ -49,7 +49,7 @@ export const GetStarted = ({
             name='arrowright'
           />
         }
-        onPress={() => navigation.navigate(navigationNames.LOGIN)}
+        onPress={() => navigation.navigate(screenNames.LOGIN)}
       />
     </ImageBackground>
   );

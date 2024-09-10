@@ -1,7 +1,7 @@
 import React from "react";
 import { Screen } from "../screen";
 import { AuthScreenProps } from "@src/router/types";
-import { navigationNames } from "@src/navigation/navigation-names";
+import { screenNames } from "@src/navigation/navigation-names";
 import { Image, StyleSheet, View } from "react-native";
 import { DVH, DVW, moderateScale } from "@src/resources/scaling";
 import { BoldText, IconButton } from "@src/components";
@@ -9,9 +9,7 @@ import { Fontisto } from "@expo/vector-icons";
 import { colors } from "@src/resources/colors";
 import { useIsAuthenticatedStore } from "@src/services/store/useAuthenticationStore";
 
-export const Login = ({
-  navigation,
-}: AuthScreenProps<navigationNames.LOGIN>) => {
+export const Login = ({ navigation }: AuthScreenProps<screenNames.LOGIN>) => {
   const { setIsAuthenticated } = useIsAuthenticatedStore();
   return (
     <Screen>

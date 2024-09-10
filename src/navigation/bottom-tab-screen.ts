@@ -1,22 +1,22 @@
 import { bottomTabScreenTypes } from "@src/types/types";
-import { navigationNames } from "./navigation-names";
+import { screenNames } from "./navigation-names";
 import { AIChat, History, Home, Settings } from "@src/screens/app";
 
 export const bottomTabScreen: bottomTabScreenTypes[] = [
   {
-    screenName: navigationNames.HOME,
+    screenName: screenNames.HOME,
     component: Home,
   },
   {
-    screenName: navigationNames.AI_CHAT,
+    screenName: screenNames.AI_CHAT,
     component: AIChat,
   },
   {
-    screenName: navigationNames.HISTORY,
+    screenName: screenNames.HISTORY,
     component: History,
   },
   {
-    screenName: navigationNames.SETTINGS,
+    screenName: screenNames.SETTINGS,
     component: Settings,
   },
 ];

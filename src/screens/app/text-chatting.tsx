@@ -11,16 +11,16 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { AIImageMessage, AITextMessage, UserMessage } from "@src/components";
 import { useChatting } from "@src/services/hooks";
 
-export const VoiceChatting = ({
+export const TextChatting = ({
   navigation,
-}: RootStackScreenProps<screenNames.VOICE_CHATTING>) => {
+}: RootStackScreenProps<screenNames.TEXT_CHATTING>) => {
   const [messages, setMessages] = useState<any[]>(dummyMessages);
   const { copyTextToClipBoard, likeUnlikeMessage } = useChatting();
   return (
     <>
       <Screen>
         <ScreenTitle
-          title='Voice Chat'
+          title='Text Chat'
           bckBtnOnPress={() => navigation.navigate(screenNames.BOTTOM_TAB)}
           rightIcon={
             <AntDesign

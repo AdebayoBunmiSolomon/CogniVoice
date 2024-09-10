@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { BottomTabBarStackParamList } from "./types";
-import { navigationNames } from "@src/navigation/navigation-names";
+import { screenNames } from "@src/navigation/navigation-names";
 import { bottomTabScreen } from "@src/navigation";
 import { DVH, moderateScale } from "@src/resources/scaling";
 import { RegularText } from "@src/components";
@@ -33,45 +33,45 @@ export const BottomTabStack = () => {
             </RegularText>
           ),
         tabBarIcon: ({ focused }) =>
-          focused && route.name === navigationNames.HOME ? (
+          focused && route.name === screenNames.HOME ? (
             <AntDesign
               name='home'
               size={moderateScale(20)}
               color={colors.main}
             />
-          ) : !focused && route.name === navigationNames.HOME ? (
+          ) : !focused && route.name === screenNames.HOME ? (
             <AntDesign
               name='home'
               size={moderateScale(20)}
               color={colors.darkGray}
             />
-          ) : focused && route.name === navigationNames.AI_CHAT ? (
+          ) : focused && route.name === screenNames.AI_CHAT ? (
             <MaterialCommunityIcons
               name='robot'
               size={moderateScale(20)}
               color={colors.main}
             />
-          ) : !focused && route.name === navigationNames.AI_CHAT ? (
+          ) : !focused && route.name === screenNames.AI_CHAT ? (
             <MaterialCommunityIcons
               name='robot'
               size={moderateScale(20)}
               color={colors.darkGray}
             />
-          ) : focused && route.name === navigationNames.HISTORY ? (
+          ) : focused && route.name === screenNames.HISTORY ? (
             <Octicons name='log' size={moderateScale(20)} color={colors.main} />
-          ) : !focused && route.name === navigationNames.HISTORY ? (
+          ) : !focused && route.name === screenNames.HISTORY ? (
             <Octicons
               name='log'
               size={moderateScale(20)}
               color={colors.darkGray}
             />
-          ) : focused && route.name === navigationNames.SETTINGS ? (
+          ) : focused && route.name === screenNames.SETTINGS ? (
             <Ionicons
               name='settings'
               size={moderateScale(20)}
               color={colors.main}
             />
-          ) : !focused && route.name === navigationNames.SETTINGS ? (
+          ) : !focused && route.name === screenNames.SETTINGS ? (
             <Ionicons
               name='settings'
               size={moderateScale(20)}
@@ -79,7 +79,7 @@ export const BottomTabStack = () => {
             />
           ) : undefined,
       })}
-      initialRouteName={navigationNames.HOME}>
+      initialRouteName={screenNames.HOME}>
       {bottomTabScreen &&
         bottomTabScreen.map((screen, index) => (
           <Tab.Screen

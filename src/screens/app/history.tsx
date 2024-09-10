@@ -1,4 +1,4 @@
-import { navigationNames } from "@src/navigation/navigation-names";
+import { screenNames } from "@src/navigation/navigation-names";
 import React from "react";
 import { Screen } from "../screen";
 import { BottomTabBarScreenProps } from "@src/router/types";
@@ -15,7 +15,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 export const History = ({
   navigation,
-}: BottomTabBarScreenProps<navigationNames.HISTORY>) => {
+}: BottomTabBarScreenProps<screenNames.HISTORY>) => {
   // Group data by date
   const groupedData = groupDataByDate(history);
   const { setSection } = useHistory();
@@ -26,7 +26,7 @@ export const History = ({
         <Screen>
           <ScreenTitle
             title='History'
-            bckBtnOnPress={() => navigation.navigate(navigationNames.HOME)}
+            bckBtnOnPress={() => navigation.navigate(screenNames.HOME)}
           />
           <SectionList
             sections={sectionsData}

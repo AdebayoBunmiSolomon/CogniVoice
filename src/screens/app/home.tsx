@@ -1,4 +1,4 @@
-import { navigationNames } from "@src/navigation/navigation-names";
+import { screenNames } from "@src/navigation/navigation-names";
 import React from "react";
 import { Screen } from "../screen";
 import { BottomTabBarScreenProps } from "@src/router/types";
@@ -22,7 +22,7 @@ import { promptList } from "@src/constants/prompt-list";
 
 export const Home = ({
   navigation,
-}: BottomTabBarScreenProps<navigationNames.HOME>) => {
+}: BottomTabBarScreenProps<screenNames.HOME>) => {
   return (
     <>
       <VerticalScrollContainer>
@@ -60,7 +60,7 @@ export const Home = ({
               backgroundColor: colors.main,
             }}
             onPress={() => {
-              navigation.navigate(navigationNames.AI_CHAT);
+              navigation.navigate(screenNames.AI_CHAT);
             }}
           />
           <SubHeader leftTextTitle='Chat History' rightTextTitle='Show all' />

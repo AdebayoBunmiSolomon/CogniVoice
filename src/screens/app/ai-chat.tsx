@@ -1,4 +1,4 @@
-import { navigationNames } from "@src/navigation/navigation-names";
+import { screenNames } from "@src/navigation/navigation-names";
 import React from "react";
 import { Screen } from "../screen";
 import { BottomTabBarScreenProps } from "@src/router/types";
@@ -19,14 +19,14 @@ import { StyleSheet, View } from "react-native";
 
 export const AIChat = ({
   navigation,
-}: BottomTabBarScreenProps<navigationNames.AI_CHAT>) => {
+}: BottomTabBarScreenProps<screenNames.AI_CHAT>) => {
   return (
     <>
       <VerticalScrollContainer>
         <Screen>
           <ScreenTitle
             title='ChatAI'
-            bckBtnOnPress={() => navigation.navigate(navigationNames.HOME)}
+            bckBtnOnPress={() => navigation.navigate(screenNames.HOME)}
             rightIcon={
               <Entypo
                 name='back-in-time'
@@ -45,7 +45,7 @@ export const AIChat = ({
             <View>
               <CircularIconButton
                 onPress={() => {
-                  navigation.navigate(navigationNames.VOICE_CHATTING);
+                  navigation.navigate(screenNames.VOICE_CHATTING);
                 }}
                 titleType='regular'
                 style={{
@@ -63,7 +63,7 @@ export const AIChat = ({
             <View>
               <CircularIconButton
                 onPress={() => {
-                  navigation.navigate(navigationNames.VOICE_CHATTING);
+                  navigation.navigate(screenNames.TEXT_CHATTING);
                 }}
                 titleType='regular'
                 style={{

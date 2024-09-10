@@ -1,4 +1,4 @@
-export enum navigationNames {
+export enum screenNames {
   GET_STARTED = "GET_STARTED",
   LOGIN = "LOGIN",
   HOME = "HOME",
@@ -6,5 +6,6 @@ export enum navigationNames {
   AI_CHAT = "AI-CHAT",
   SETTINGS = "SETTINGS",
   VOICE_CHATTING = "VOICE_CHATTING",
+  TEXT_CHATTING = "TEXT_CHATTING",
   BOTTOM_TAB = "BOTTOM_TAB",
 }
