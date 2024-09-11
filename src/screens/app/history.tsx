@@ -1,5 +1,5 @@
 import { screenNames } from "@src/navigation/navigation-names";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Screen } from "../screen";
 import { BottomTabBarScreenProps } from "@src/router/types";
 import { VerticalScrollContainer } from "@src/components/core";
@@ -12,14 +12,37 @@ import { colors } from "@src/resources/colors";
 import { history } from "@src/constants/history";
 import { useHistory } from "@src/services/hooks";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export const History = ({
   navigation,
 }: BottomTabBarScreenProps<screenNames.HISTORY>) => {
   // Group data by date
-  const groupedData = groupDataByDate(history);
+  const [groupedData, setGroupedData] = useState<any>(groupDataByDate(history));
   const { setSection } = useHistory();
   const sectionsData = setSection(groupedData);
+
+  const deleteItem = (historyId: number) => {
+    // console.log(historyId);
+    setGroupedData(history.filter((items) => items.id !== historyId));
+  };
+
+  const renderRightAction = (itemId: number) => {
+    return (
+      <TouchableOpacity
+        style={styles.deleteIconBtn}
+        onPress={() => deleteItem(itemId)}>
+        <MaterialIcons
+          name='delete'
+          color={colors.white}
+          size={moderateScale(20)}
+        />
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <>
       <VerticalScrollContainer>
@@ -32,16 +55,18 @@ export const History = ({
             sections={sectionsData}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <View style={styles.item}>
-                <Ionicons
-                  name='chatbox-ellipses-outline'
-                  size={moderateScale(20)}
-                  color={colors.black}
-                />
-                <RegularText sizeSmall black>
-                  {item.question}
-                </RegularText>
-              </View>
+              <Swipeable renderRightActions={() => renderRightAction(item.id)}>
+                <View style={styles.item}>
+                  <Ionicons
+                    name='chatbox-ellipses-outline'
+                    size={moderateScale(20)}
+                    color={colors.black}
+                  />
+                  <RegularText sizeSmall black>
+                    {item.question}
+                  </RegularText>
+                </View>
+              </Swipeable>
             )}
             renderSectionHeader={({ section: { date } }) => (
               <View style={styles.header}>
@@ -72,5 +97,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: moderateScale(10),
+  },
+  deleteIconBtn: {
+    paddingHorizontal: moderateScale(10),
+    paddingVertical: moderateScale(15),
+    marginBottom: moderateScale(8),
+    borderRadius: moderateScale(10),
+    backgroundColor: colors.main,
   },
 });

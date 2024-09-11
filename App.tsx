@@ -2,6 +2,7 @@ import { useFontLoading } from "@src/hooks";
 import { Router } from "@src/router/router";
 import { AppLoader } from "@src/screens";
 import { useEffect, useState } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function App() {
   const { isLoadingFontComplete, loadResourcesAndDataAsync } = useFontLoading();
@@ -13,5 +14,11 @@ export default function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  return <>{isLoadingFontComplete ? <AppLoader /> : <Router />}</>;
+  return (
+    <>
+      <GestureHandlerRootView>
+        {isLoadingFontComplete ? <AppLoader /> : <Router />}
+      </GestureHandlerRootView>
+    </>
+  );
 }
