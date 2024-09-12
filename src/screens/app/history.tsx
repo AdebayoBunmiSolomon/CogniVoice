@@ -12,11 +12,13 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { Swipeable } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useHistory } from "@src/services/hooks";
+import { useOpenCloseSwipeItem } from "@src/hooks";
 
 export const History = ({
   navigation,
 }: BottomTabBarScreenProps<screenNames.HISTORY>) => {
   const { sectionData, deleteSectionItem } = useHistory();
+  const { swipeableRefs, handleSwipeOpen } = useOpenCloseSwipeItem();
 
   const renderRightAction = (
     sectionIndex: number,
@@ -49,6 +51,10 @@ export const History = ({
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item, index, section }) => (
               <Swipeable
+                ref={(ref) => (swipeableRefs.current[item.id] = ref)}
+                onSwipeableOpen={() =>
+                  handleSwipeOpen(swipeableRefs.current[item.id])
+                }
                 renderRightActions={() =>
                   renderRightAction(
                     sectionData.indexOf(section),
