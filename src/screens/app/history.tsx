@@ -1,39 +1,32 @@
 import { screenNames } from "@src/navigation/navigation-names";
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Screen } from "../screen";
 import { BottomTabBarScreenProps } from "@src/router/types";
 import { VerticalScrollContainer } from "@src/components/core";
 import { ScreenTitle } from "@src/common/header-title";
-import { SectionList, View, StyleSheet } from "react-native";
-import { groupDataByDate } from "@src/helper/helper";
+import { SectionList, View, StyleSheet, TouchableOpacity } from "react-native";
 import { RegularText, SemiBoldText } from "@src/components";
 import { moderateScale } from "@src/resources/scaling";
 import { colors } from "@src/resources/colors";
-import { history } from "@src/constants/history";
-import { useHistory } from "@src/services/hooks";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Swipeable } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useHistory } from "@src/services/hooks";
 
 export const History = ({
   navigation,
 }: BottomTabBarScreenProps<screenNames.HISTORY>) => {
-  // Group data by date
-  const [groupedData, setGroupedData] = useState<any>(groupDataByDate(history));
-  const { setSection } = useHistory();
-  const sectionsData = setSection(groupedData);
+  const { sectionData, deleteSectionItem } = useHistory();
 
-  const deleteItem = (historyId: number) => {
-    // console.log(historyId);
-    setGroupedData(history.filter((items) => items.id !== historyId));
-  };
-
-  const renderRightAction = (itemId: number) => {
+  const renderRightAction = (
+    sectionIndex: number,
+    itemIndex: number,
+    dataItemId: number
+  ) => {
     return (
       <TouchableOpacity
         style={styles.deleteIconBtn}
-        onPress={() => deleteItem(itemId)}>
+        onPress={() => deleteSectionItem(sectionIndex, itemIndex, dataItemId)}>
         <MaterialIcons
           name='delete'
           color={colors.white}
@@ -52,10 +45,17 @@ export const History = ({
             bckBtnOnPress={() => navigation.navigate(screenNames.HOME)}
           />
           <SectionList
-            sections={sectionsData}
+            sections={sectionData}
             keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <Swipeable renderRightActions={() => renderRightAction(item.id)}>
+            renderItem={({ item, index, section }) => (
+              <Swipeable
+                renderRightActions={() =>
+                  renderRightAction(
+                    sectionData.indexOf(section),
+                    index,
+                    item.id
+                  )
+                }>
                 <View style={styles.item}>
                   <Ionicons
                     name='chatbox-ellipses-outline'

@@ -1,7 +1,7 @@
 /**
  *  Helper function to group sorted data by date
  **/
-export const groupDataByDate = (sortedData: any[]) => {
+export const transformToGroupedData = (sortedData: any[]) => {
   return sortedData.reduce((acc, currentItem) => {
     const date = new Date(currentItem.date).toISOString(); // Group by date (YYYY-MM-DD)
 
@@ -18,7 +18,7 @@ export const getDateTime = (dateVal: string) => {
   const dateValue = new Date(dateVal);
   const dateValue2 = new Date();
   //variables to current default month and date from system
-  const currYear = dateValue2.getFullYear();
+  // const currYear = dateValue2.getFullYear();
   const currDate = dateValue2.getDate();
   const currMonth = dateValue2.toLocaleString("default", {
     month: "long",
