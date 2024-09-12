@@ -35,3 +35,12 @@ export type aiChatType = {
   title: string;
   icon: ImageSourcePropType;
 }[];
+
+export type settingsType = {
+  title: string;
+  data: {
+    title: string;
+    icon: ImageSourcePropType;
+    navigationScreen: string;
+  }[];
+}[];

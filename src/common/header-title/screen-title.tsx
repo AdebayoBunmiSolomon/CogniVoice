@@ -1,7 +1,7 @@
-import { BoldText } from "@src/components";
+import { BoldText, SemiBoldText } from "@src/components";
 import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 import { moderateScale } from "@src/resources/scaling";
 import { colors } from "@src/resources/colors";
 
@@ -18,15 +18,15 @@ export const ScreenTitle: React.FC<screenTitleProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={bckBtnOnPress}>
-        <AntDesign
-          name={"arrowleft"}
-          size={moderateScale(20)}
+      <TouchableOpacity onPress={bckBtnOnPress} style={styles.button}>
+        <Entypo
+          name={"chevron-left"}
+          size={moderateScale(25)}
           color={colors.black}
         />
+        <SemiBoldText sizeBody>{title}</SemiBoldText>
       </TouchableOpacity>
       <View style={styles.subContainer}>
-        <BoldText sizeBody>{title}</BoldText>
         <View>{rightIcon ? rightIcon : <View />}</View>
       </View>
     </View>
@@ -39,10 +39,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: moderateScale(1),
+  },
   subContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    width: "56%",
   },
 });

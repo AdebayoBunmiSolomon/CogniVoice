@@ -25,7 +25,11 @@ export type BottomTabBarScreenProps<
 
 //native and app screen navigation
 export interface RootStackParamList extends ParamListBase {
-  Chatting: undefined;
+  TextChatting: undefined;
+  VoiceChatting: {
+    id: number;
+  };
+  AboutUs: undefined;
 }
 
 export type RootStackScreenProps<ScreenName extends keyof RootStackParamList> =

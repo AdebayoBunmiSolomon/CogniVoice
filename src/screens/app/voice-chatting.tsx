@@ -13,6 +13,7 @@ import { useChatting } from "@src/services/hooks";
 
 export const VoiceChatting = ({
   navigation,
+  route,
 }: RootStackScreenProps<screenNames.VOICE_CHATTING>) => {
   const [messages, setMessages] = useState<any[]>(dummyMessages);
   const { copyTextToClipBoard, likeUnlikeMessage } = useChatting();

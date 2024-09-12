@@ -8,4 +8,5 @@ export enum screenNames {
   VOICE_CHATTING = "VOICE_CHATTING",
   TEXT_CHATTING = "TEXT_CHATTING",
   BOTTOM_TAB = "BOTTOM_TAB",
+  ABOUT_US = "ABOUT_US",
 }

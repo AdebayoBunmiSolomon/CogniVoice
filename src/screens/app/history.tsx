@@ -68,9 +68,14 @@ export const History = ({
                     size={moderateScale(20)}
                     color={colors.black}
                   />
-                  <RegularText sizeSmall black>
-                    {item.question}
-                  </RegularText>
+                  <View
+                    style={{
+                      maxWidth: "90%",
+                    }}>
+                    <RegularText sizeSmall black>
+                      {item.question}
+                    </RegularText>
+                  </View>
                 </View>
               </Swipeable>
             )}
@@ -110,5 +115,6 @@ const styles = StyleSheet.create({
     marginBottom: moderateScale(8),
     borderRadius: moderateScale(10),
     backgroundColor: colors.main,
+    justifyContent: "center",
   },
 });
