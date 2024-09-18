@@ -1,8 +1,8 @@
-import { BoldText, SemiBoldText } from "@src/components";
+import { SemiBoldText } from "@src/components";
 import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
-import { moderateScale } from "@src/resources/scaling";
+import { DVW, moderateScale, verticalScale } from "@src/resources/scaling";
 import { colors } from "@src/resources/colors";
 
 type screenTitleProps = {
@@ -38,6 +38,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginLeft: DVW(-2),
+    paddingBottom: verticalScale(10),
   },
   button: {
     flexDirection: "row",

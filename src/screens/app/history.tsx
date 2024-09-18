@@ -6,18 +6,19 @@ import { VerticalScrollContainer } from "@src/components/core";
 import { ScreenTitle } from "@src/common/header-title";
 import { SectionList, View, StyleSheet, TouchableOpacity } from "react-native";
 import { RegularText, SemiBoldText } from "@src/components";
-import { moderateScale } from "@src/resources/scaling";
+import { DVH, moderateScale } from "@src/resources/scaling";
 import { colors } from "@src/resources/colors";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Swipeable } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useHistory } from "@src/services/hooks";
 import { useOpenCloseSwipeItem } from "@src/hooks";
+import { Skeleton } from "moti/skeleton";
 
 export const History = ({
   navigation,
 }: BottomTabBarScreenProps<screenNames.HISTORY>) => {
-  const { sectionData, deleteSectionItem } = useHistory();
+  const { sectionData, deleteSectionItem, loading } = useHistory();
   const { swipeableRefs, handleSwipeOpen } = useOpenCloseSwipeItem();
 
   const renderRightAction = (
@@ -32,7 +33,7 @@ export const History = ({
         <MaterialIcons
           name='delete'
           color={colors.white}
-          size={moderateScale(20)}
+          size={moderateScale(25)}
         />
       </TouchableOpacity>
     );
@@ -40,6 +41,19 @@ export const History = ({
 
   return (
     <>
+      {/* {loading ? (
+        <>
+          <Skeleton
+            colorMode='light'
+            width={"90%"}
+            height={DVH(10)}
+            radius={"round"}>
+            <SemiBoldText sizeSmall gray>
+              test
+            </SemiBoldText>
+          </Skeleton>
+        </>
+      ) : ( */}
       <VerticalScrollContainer>
         <Screen>
           <ScreenTitle
@@ -80,15 +94,16 @@ export const History = ({
               </Swipeable>
             )}
             renderSectionHeader={({ section: { date } }) => (
-              <View style={styles.header}>
-                <SemiBoldText sizeSmall gray>
-                  {date}
-                </SemiBoldText>
-              </View>
+              // <View style={styles.header}>
+              <SemiBoldText sizeSmall gray>
+                {date}
+              </SemiBoldText>
+              // </View>
             )}
           />
         </Screen>
       </VerticalScrollContainer>
+      {/* )} */}
     </>
   );
 };
@@ -111,7 +126,7 @@ const styles = StyleSheet.create({
   },
   deleteIconBtn: {
     paddingHorizontal: moderateScale(10),
-    paddingVertical: moderateScale(15),
+    paddingVertical: moderateScale(2),
     marginBottom: moderateScale(8),
     borderRadius: moderateScale(10),
     backgroundColor: colors.main,

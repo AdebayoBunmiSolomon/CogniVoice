@@ -1,7 +1,7 @@
 export const history = [
-  { id: 1, question: "UI/ UX Design", date: "2024-09-12" },
-  { id: 2, question: "Programming", date: "2024-09-11" },
-  { id: 3, question: "What is react native", date: "2024-09-11" },
+  { id: 1, question: "UI/ UX Design", date: "2024-09-18" },
+  { id: 2, question: "Programming", date: "2024-09-18" },
+  { id: 3, question: "What is react native", date: "2024-09-17" },
   {
     id: 4,
     question: "List the best state management tools",

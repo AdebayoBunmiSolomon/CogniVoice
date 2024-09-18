@@ -16,15 +16,20 @@ export const useHistory = () => {
   const [groupedData, setGroupedData] = useState<any>(
     transformToGroupedData(history)
   );
+  const [loading, setLoading] = useState<boolean>(false);
   const [sectionData, setSectionData] = useState<sectionDataType>([]);
 
   // Convert grouped data to the format required by SectionList in the UI
-  const sectionizeData = () => {
+  const sectionizeData = async () => {
+    setLoading(true);
+    // Introduce a delay (e.g., 2 seconds)
+    await new Promise((resolve) => setTimeout(resolve, 5000));
     const sections = Object.keys(groupedData).map((date) => ({
       date: getDateTime(date), // Section header (date)
       data: groupedData[date], // Items for that date
     }));
     setSectionData(sections);
+    setLoading(true);
   };
 
   const deleteSectionItem = (
@@ -45,13 +50,14 @@ export const useHistory = () => {
   };
 
   useEffect(() => {
-    const fetchData = () => {
-      sectionizeData();
+    const fetchData = async () => {
+      await sectionizeData();
     };
     fetchData();
   }, []);
 
   return {
+    loading,
     sectionData,
     setSectionData,
     deleteSectionItem,
