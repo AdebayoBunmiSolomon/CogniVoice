@@ -7,6 +7,7 @@ export * from "./shared/text/light-text";
 export * from "./shared/buttons/button";
 export * from "./shared/buttons/icon-button";
 export * from "./shared/buttons/circular-icon-button";
+export * from "./shared/inputs/text-input";
 //app exports
 export * from "./app/home/chat-history";
 export * from "./app/home/explore-more";

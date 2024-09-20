@@ -7,9 +7,15 @@ import { AntDesign } from "@expo/vector-icons";
 import { DVH, DVW, moderateScale, verticalScale } from "@src/resources/scaling";
 import { colors } from "@src/resources/colors";
 import { dummyMessages } from "@src/constants/dummy-messages";
-import { ScrollView, StyleSheet, View } from "react-native";
-import { AIImageMessage, AITextMessage, UserMessage } from "@src/components";
+import { Platform, ScrollView, StyleSheet, View } from "react-native";
+import {
+  AIImageMessage,
+  AITextMessage,
+  TextInputs,
+  UserMessage,
+} from "@src/components";
 import { useChatting } from "@src/services/hooks";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export const TextChatting = ({
   navigation,
@@ -42,7 +48,7 @@ export const TextChatting = ({
               {messages.map((message, index) => {
                 if (message.role === "assistant") {
                   if (message.content.includes("https")) {
-                    //it's an ai image
+                    //it's an AI image
                     return (
                       <AIImageMessage content={message.content} key={index} />
                     );
@@ -81,15 +87,38 @@ export const TextChatting = ({
           </View>
         ) : null}
       </Screen>
+      <View
+        style={{
+          width: "100%",
+          alignItems: "center",
+          position: "absolute",
+          bottom: Platform.OS === "ios" ? verticalScale(4) : verticalScale(-15),
+        }}>
+        <KeyboardAwareScrollView
+          contentContainerStyle={{ flexGrow: 0.5, backgroundColor: "red" }}
+          enableOnAndroid={true} // Enable keyboard handling on Android
+          keyboardShouldPersistTaps='handled' // Dismiss the keyboard on tapping outside input
+          scrollEnabled={false} // Ensures scrolling works on Android
+          showsVerticalScrollIndicator={false}
+          extraScrollHeight={Platform.OS === "ios" ? DVH(-4) : DVH(-32)} // Reduce space on Android
+        >
+          <TextInputs label='' placeholder='test' />
+        </KeyboardAwareScrollView>
+      </View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   msgContainer: {
-    height: "93%",
+    height: Platform.OS === "ios" ? "83%" : "86%",
+    marginBottom: verticalScale(5),
     backgroundColor: colors.darkGray,
     borderRadius: moderateScale(10),
+    overflow: "hidden",
   },
   assistantMsgContentImg: {
     width: "100%",

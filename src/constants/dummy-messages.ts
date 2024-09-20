@@ -36,4 +36,13 @@ export const dummyMessages = [
     content:
       "https://miro.medium.com/v2/resize:fit:1400/1*Fg-YvdSobGVknRCIE6vb4Q.png",
   },
+  {
+    role: "user",
+    content: "show me a react native code picture",
+  },
+  {
+    role: "assistant",
+    content:
+      "https://miro.medium.com/v2/resize:fit:1400/1*Fg-YvdSobGVknRCIE6vb4Q.png",
+  },
 ];
