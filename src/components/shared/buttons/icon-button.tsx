@@ -15,9 +15,9 @@ import { Loader } from "@src/components/core";
 import { colors } from "@src/resources/colors";
 
 type iconButtonProps = {
-  title: string;
+  title?: string;
   style?: ViewStyle;
-  titleType: "regular" | "medium" | "light" | "bold";
+  titleType?: "regular" | "medium" | "light" | "bold";
   onPress: () => void;
   textBlack?: boolean;
   textWhite?: boolean;
@@ -82,7 +82,7 @@ export const IconButton: React.FC<iconButtonProps> = ({
         <Loader size='small' color={colors.white} />
       ) : (
         <>
-          {titleType === "bold" ? (
+          {titleType === "bold" && !undefined ? (
             <BoldText
               sizeBody
               black={textBlack && textBlack}
@@ -93,7 +93,7 @@ export const IconButton: React.FC<iconButtonProps> = ({
               blue={textBlue && textBlue}>
               {title ? title : "no-title"}
             </BoldText>
-          ) : titleType === "light" ? (
+          ) : titleType === "light" && !undefined ? (
             <LightText
               sizeBody
               black={textBlack && textBlack}
@@ -104,7 +104,7 @@ export const IconButton: React.FC<iconButtonProps> = ({
               blue={textBlue && textBlue}>
               {title ? title : "no-title"}
             </LightText>
-          ) : titleType === "medium" ? (
+          ) : titleType === "medium" && !undefined ? (
             <MediumText
               sizeBody
               black={textBlack && textBlack}
@@ -115,7 +115,7 @@ export const IconButton: React.FC<iconButtonProps> = ({
               blue={textBlue && textBlue}>
               {title ? title : "no-title"}
             </MediumText>
-          ) : titleType === "regular" ? (
+          ) : titleType === "regular" && !undefined ? (
             <RegularText
               sizeBody
               black={textBlack && textBlack}

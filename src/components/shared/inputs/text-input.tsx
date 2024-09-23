@@ -1,4 +1,4 @@
-import { DVW, font, layout } from "@src/resources/scaling";
+import { DVW, font, layout, verticalScale } from "@src/resources/scaling";
 import React from "react";
 import {
   StyleSheet,
@@ -137,7 +137,8 @@ const styles = StyleSheet.create({
     marginBottom: layout.size2,
   },
   textContainer: {
-    paddingVertical: Platform.OS === "android" ? layout.size6 : layout.size14,
+    paddingVertical:
+      Platform.OS === "ios" ? verticalScale(12) : verticalScale(6),
     paddingHorizontal: layout.size10,
     borderWidth: DVW(0.3),
     borderRadius: layout.size10,

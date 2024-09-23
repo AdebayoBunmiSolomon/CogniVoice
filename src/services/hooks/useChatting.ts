@@ -1,5 +1,5 @@
 import * as Clipboard from "expo-clipboard";
-import { useMessageStore } from "../store/useMessageStore";
+import { useLikedMessageStore } from "../store/useLikedMessageStore";
 import { useState } from "react";
 
 type imagArrTypes = {
@@ -7,7 +7,7 @@ type imagArrTypes = {
 }[];
 
 export const useChatting = () => {
-  const { setMessage, message } = useMessageStore();
+  const { setLikeMessage, likeMessage } = useLikedMessageStore();
   const [images, setImages] = useState<imagArrTypes>([]);
   const [visible, setVisible] = useState<boolean>(false);
   /**
@@ -21,17 +21,17 @@ export const useChatting = () => {
    * like or unlike a message to / from an array of message
    */
   const likeUnlikeMessage = (content: string) => {
-    const msgExist = message.some((msgContent) => msgContent === content);
+    const msgExist = likeMessage.some((msgContent) => msgContent === content);
     if (msgExist) {
       //remove from message
-      const updatedMessage = message.filter(
+      const updatedMessage = likeMessage.filter(
         (msgContent) => msgContent !== content
       );
-      setMessage(updatedMessage);
+      setLikeMessage(updatedMessage);
     } else {
       //add to message
-      const updatedMessage = [...message, content];
-      setMessage(updatedMessage);
+      const updatedMessage = [...likeMessage, content];
+      setLikeMessage(updatedMessage);
     }
   };
 

@@ -16,9 +16,9 @@ export const settings: settingsType = [
         navigationScreen: "",
       },
       {
-        title: "Term of Use",
+        title: "Terms of Use",
         icon: require("@src/assets/term-of-use.png"),
-        navigationScreen: "",
+        navigationScreen: screenNames.TERMS_OF_USE,
       },
       {
         title: "Language",

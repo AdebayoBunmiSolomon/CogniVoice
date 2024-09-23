@@ -50,6 +50,7 @@ export const CircularIconButton: React.FC<circularIconButtonProps> = ({
       style={[
         styles.button,
         {
+          borderColor: bgColor ? bgColor : style?.backgroundColor,
           backgroundColor: bgColor ? bgColor : style?.backgroundColor,
         },
       ]}>

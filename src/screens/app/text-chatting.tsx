@@ -7,7 +7,14 @@ import { AntDesign } from "@expo/vector-icons";
 import { DVH, DVW, moderateScale, verticalScale } from "@src/resources/scaling";
 import { colors } from "@src/resources/colors";
 import { dummyMessages } from "@src/constants/dummy-messages";
-import { Platform, ScrollView, StyleSheet, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import {
   AIImageMessage,
   AITextMessage,
@@ -15,7 +22,7 @@ import {
   UserMessage,
 } from "@src/components";
 import { useChatting } from "@src/services/hooks";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Feather } from "@expo/vector-icons";
 
 export const TextChatting = ({
   navigation,
@@ -36,26 +43,44 @@ export const TextChatting = ({
             />
           }
         />
-        {messages.length > 0 ? (
-          <View style={styles.msgContainer}>
-            <ScrollView
-              bounces={false}
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={{
-                flexGrow: 1,
-                padding: moderateScale(10),
-              }}>
-              {messages.map((message, index) => {
-                if (message.role === "assistant") {
-                  if (message.content.includes("https")) {
-                    //it's an AI image
-                    return (
-                      <AIImageMessage content={message.content} key={index} />
-                    );
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "height" : undefined}
+          style={{ flex: 1 }}>
+          {messages.length > 0 ? (
+            <View style={styles.msgContainer}>
+              <ScrollView
+                bounces={false}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{
+                  flexGrow: 1,
+                  padding: moderateScale(10),
+                }}>
+                {messages.map((message, index) => {
+                  if (message.role === "assistant") {
+                    if (message.content.includes("https")) {
+                      //it's an AI image
+                      return (
+                        <AIImageMessage content={message.content} key={index} />
+                      );
+                    } else {
+                      //text message
+                      return (
+                        <AITextMessage
+                          content={message.content}
+                          key={index}
+                          copyToClipBoard={() =>
+                            copyTextToClipBoard(message.content)
+                          }
+                          likeUnlikeMsg={() => {
+                            likeUnlikeMessage(message.content);
+                          }}
+                        />
+                      );
+                    }
                   } else {
-                    //text message
+                    //user message
                     return (
-                      <AITextMessage
+                      <UserMessage
                         content={message.content}
                         key={index}
                         copyToClipBoard={() =>
@@ -67,54 +92,49 @@ export const TextChatting = ({
                       />
                     );
                   }
-                } else {
-                  //user message
-                  return (
-                    <UserMessage
-                      content={message.content}
-                      key={index}
-                      copyToClipBoard={() =>
-                        copyTextToClipBoard(message.content)
-                      }
-                      likeUnlikeMsg={() => {
-                        likeUnlikeMessage(message.content);
-                      }}
-                    />
-                  );
-                }
-              })}
-            </ScrollView>
+                })}
+              </ScrollView>
+            </View>
+          ) : null}
+          <View style={styles.sendBtnContainer}>
+            <TextInputs label='' placeholder='test' />
+            <TouchableOpacity style={styles.sendBtn}>
+              <Feather
+                name='send'
+                color={colors.white}
+                size={moderateScale(20)}
+              />
+            </TouchableOpacity>
           </View>
-        ) : null}
+        </KeyboardAvoidingView>
       </Screen>
-      <View
-        style={{
-          width: "100%",
-          alignItems: "center",
-          position: "absolute",
-          bottom: Platform.OS === "ios" ? verticalScale(4) : verticalScale(-15),
-        }}>
-        <KeyboardAwareScrollView
-          contentContainerStyle={{ flexGrow: 0.5, backgroundColor: "red" }}
-          enableOnAndroid={true} // Enable keyboard handling on Android
-          keyboardShouldPersistTaps='handled' // Dismiss the keyboard on tapping outside input
-          scrollEnabled={false} // Ensures scrolling works on Android
-          showsVerticalScrollIndicator={false}
-          extraScrollHeight={Platform.OS === "ios" ? DVH(-4) : DVH(-32)} // Reduce space on Android
-        >
-          <TextInputs label='' placeholder='test' />
-        </KeyboardAwareScrollView>
-      </View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
+  sendBtnContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    marginLeft: DVW(-1),
+    bottom: Platform.OS === "ios" ? verticalScale(4) : verticalScale(-15),
+    flexDirection: "row",
+    padding: moderateScale(10),
+    gap: moderateScale(2),
+  },
+  sendBtn: {
+    backgroundColor: colors.blue,
+    paddingHorizontal: moderateScale(8),
+    paddingVertical: verticalScale(10),
+    borderRadius: moderateScale(5),
+    marginTop: DVH(-2),
+  },
   container: {
     flex: 1,
   },
   msgContainer: {
-    height: Platform.OS === "ios" ? "83%" : "86%",
+    height: Platform.OS === "ios" ? "87%" : "91%",
     marginBottom: verticalScale(5),
     backgroundColor: colors.darkGray,
     borderRadius: moderateScale(10),

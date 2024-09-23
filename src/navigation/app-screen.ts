@@ -3,6 +3,7 @@ import { screenNames } from "./navigation-names";
 import { TextChatting, VoiceChatting } from "@src/screens/app";
 import { BottomTabStack } from "@src/router/bottom-tab";
 import { AboutUs } from "@src/screens/app/settings/about-us";
+import { TermsOfUse } from "@src/screens/app/settings/terms-of-use";
 
 export const appScreens: appScreenTypes[] = [
   {
@@ -20,5 +21,9 @@ export const appScreens: appScreenTypes[] = [
   {
     screenName: screenNames.ABOUT_US,
     component: AboutUs,
+  },
+  {
+    screenName: screenNames.TERMS_OF_USE,
+    component: TermsOfUse,
   },
 ];

@@ -10,7 +10,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { MessageAction } from "./message-actions";
-import { useMessageStore } from "@src/services/store/useMessageStore";
+import { useLikedMessageStore } from "@src/services/store/useLikedMessageStore";
 import { useChatting, useMessageTemplate } from "@src/services/hooks";
 import ImageView from "react-native-image-viewing";
 
@@ -38,8 +38,8 @@ export const UserMessage: React.FC<userMsgProps> = ({
   likeUnlikeMsg,
   // unLikeMsg,
 }) => {
-  const { message } = useMessageStore();
-  const isMsgLiked = message.some((msgContent) => msgContent === content);
+  const { likeMessage } = useLikedMessageStore();
+  const isMsgLiked = likeMessage.some((msgContent) => msgContent === content);
   return (
     <View style={styles.userMsg}>
       <View style={styles.userMsgContent}>
@@ -75,8 +75,8 @@ export const AITextMessage: React.FC<aiTxtMsgProps> = ({
   likeUnlikeMsg,
   // unLikeMsg,
 }) => {
-  const { message } = useMessageStore();
-  const isMsgLiked = message.some((msgContent) => msgContent === content);
+  const { likeMessage } = useLikedMessageStore();
+  const isMsgLiked = likeMessage.some((msgContent) => msgContent === content);
   return (
     <View style={styles.assistantMsg}>
       <View style={styles.assistantMsgContent}>

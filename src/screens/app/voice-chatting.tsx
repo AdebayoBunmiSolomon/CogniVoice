@@ -7,9 +7,22 @@ import { AntDesign } from "@expo/vector-icons";
 import { DVH, DVW, moderateScale, verticalScale } from "@src/resources/scaling";
 import { colors } from "@src/resources/colors";
 import { dummyMessages } from "@src/constants/dummy-messages";
-import { ScrollView, StyleSheet, View } from "react-native";
-import { AIImageMessage, AITextMessage, UserMessage } from "@src/components";
+import {
+  Platform,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import {
+  AIImageMessage,
+  AITextMessage,
+  CircularIconButton,
+  RegularText,
+  UserMessage,
+} from "@src/components";
 import { useChatting } from "@src/services/hooks";
+import { FontAwesome } from "@expo/vector-icons";
 
 export const VoiceChatting = ({
   navigation,
@@ -81,16 +94,77 @@ export const VoiceChatting = ({
             </ScrollView>
           </View>
         ) : null}
+        <View style={styles.sendBtnContainer}>
+          <TouchableOpacity
+            style={[
+              styles.sideBtn,
+              {
+                backgroundColor: colors.main,
+              },
+            ]}>
+            <RegularText white sizeSmall>
+              stop
+            </RegularText>
+          </TouchableOpacity>
+          <CircularIconButton
+            style={{
+              backgroundColor: "#20c997",
+            }}
+            onPress={() => {}}
+            titleType='regular'
+            icon={
+              <FontAwesome
+                name='microphone'
+                size={moderateScale(20)}
+                color={colors.white}
+              />
+            }
+          />
+          <TouchableOpacity
+            style={[
+              styles.sideBtn,
+              {
+                backgroundColor: colors.lightGray,
+              },
+            ]}>
+            <RegularText>clear</RegularText>
+          </TouchableOpacity>
+        </View>
       </Screen>
     </>
   );
 };
 
 const styles = StyleSheet.create({
+  sideBtn: {
+    marginTop: verticalScale(20),
+    paddingVertical: verticalScale(2),
+    paddingHorizontal: moderateScale(7),
+    borderRadius: 50,
+  },
+  sendBtnContainer: {
+    alignItems: "center",
+    justifyContent: "space-between",
+    position: "absolute",
+    marginLeft: DVW(1),
+    width: "100%",
+    bottom: Platform.OS === "ios" ? verticalScale(15) : verticalScale(5),
+    flexDirection: "row",
+    padding: moderateScale(10),
+  },
+  sendBtn: {
+    backgroundColor: colors.blue,
+    paddingHorizontal: moderateScale(8),
+    paddingVertical: verticalScale(10),
+    borderRadius: moderateScale(5),
+    marginTop: DVH(-2),
+  },
   msgContainer: {
-    height: "93%",
+    height: Platform.OS === "ios" ? "87%" : "88%",
+    marginBottom: verticalScale(5),
     backgroundColor: colors.darkGray,
     borderRadius: moderateScale(10),
+    overflow: "hidden",
   },
   assistantMsgContentImg: {
     width: "100%",

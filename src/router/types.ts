@@ -30,6 +30,7 @@ export interface RootStackParamList extends ParamListBase {
     id: number;
   };
   AboutUs: undefined;
+  TermsOfUse: undefined;
 }
 
 export type RootStackScreenProps<ScreenName extends keyof RootStackParamList> =
