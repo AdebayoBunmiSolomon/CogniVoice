@@ -13,6 +13,9 @@ import { MessageAction } from "./message-actions";
 import { useLikedMessageStore } from "@src/services/store/useLikedMessageStore";
 import { useChatting, useMessageTemplate } from "@src/services/hooks";
 import ImageView from "react-native-image-viewing";
+import { Swipeable } from "react-native-gesture-handler";
+import { CircularIconButton } from "@src/components/shared/buttons/circular-icon-button";
+import { AntDesign } from "@expo/vector-icons";
 
 type userMsgProps = {
   content: string;
@@ -110,8 +113,31 @@ export const AIImageMessage: React.FC<aiImgMsgProps> = ({ content }) => {
   const { openToViewImg, visible, setVisible, images, setImages } =
     useChatting();
   const { shareHttpUrl } = useMessageTemplate();
+
+  //opens a button to share image url when swiped...
+  const handleRightActions = (url: string) => {
+    return (
+      <CircularIconButton
+        style={{
+          backgroundColor: colors.gray,
+        }}
+        onPress={async () => {
+          await shareHttpUrl(url);
+        }}
+        titleType='regular'
+        icon={
+          <AntDesign
+            name='sharealt'
+            size={moderateScale(20)}
+            color={colors.white}
+          />
+        }
+      />
+    );
+  };
+
   return (
-    <>
+    <Swipeable renderRightActions={() => handleRightActions(content)}>
       <View style={styles.assistantMsg}>
         <View style={styles.assistantMsgContentImgContainer}>
           <TouchableWithoutFeedback onPress={() => openToViewImg(content)}>
@@ -121,20 +147,6 @@ export const AIImageMessage: React.FC<aiImgMsgProps> = ({ content }) => {
               style={styles.assistantMsgContentImg}
             />
           </TouchableWithoutFeedback>
-          <View
-            style={{
-              marginVertical: moderateScale(5),
-              alignSelf: "flex-end",
-            }}>
-            <MessageAction
-              rightIconName={"sharealt"}
-              iconColor={colors.white}
-              msgRoleType='ai'
-              rightAction={() => {
-                shareHttpUrl(content);
-              }}
-            />
-          </View>
         </View>
       </View>
       <ImageView
@@ -146,7 +158,7 @@ export const AIImageMessage: React.FC<aiImgMsgProps> = ({ content }) => {
           setImages([]);
         }}
       />
-    </>
+    </Swipeable>
   );
 };
 

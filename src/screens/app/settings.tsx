@@ -16,12 +16,14 @@ import { DVH, DVW, moderateScale, verticalScale } from "@src/resources/scaling";
 import { Entypo } from "@expo/vector-icons";
 import { colors } from "@src/resources/colors";
 import { VerticalScrollContainer } from "@src/components/core";
+import { useSettings } from "@src/services/hooks";
 
 export const Settings = ({
   navigation,
 }: BottomTabBarScreenProps<screenNames.SETTINGS>) => {
   const date = new Date();
   const currYear = date.getFullYear();
+  const { reviewApp } = useSettings();
   return (
     <VerticalScrollContainer>
       <Screen>
@@ -41,8 +43,14 @@ export const Settings = ({
                     <TouchableOpacity
                       key={index}
                       style={styles.btnContainer}
-                      onPress={() => {
-                        navigation.navigate(items.navigationScreen);
+                      onPress={async () => {
+                        if (items.navigate) {
+                          navigation.navigate(items.navigationScreen);
+                        } else {
+                          if (items.title === "Rate App") {
+                            await reviewApp();
+                          }
+                        }
                       }}>
                       <View style={styles.suTitleContainer}>
                         <Image

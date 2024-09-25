@@ -6,14 +6,13 @@ import { VerticalScrollContainer } from "@src/components/core";
 import { ScreenTitle } from "@src/common/header-title";
 import { SectionList, View, StyleSheet, TouchableOpacity } from "react-native";
 import { RegularText, SemiBoldText } from "@src/components";
-import { DVH, moderateScale } from "@src/resources/scaling";
+import { moderateScale } from "@src/resources/scaling";
 import { colors } from "@src/resources/colors";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Swipeable } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useHistory } from "@src/services/hooks";
 import { useOpenCloseSwipeItem } from "@src/hooks";
-import { Skeleton } from "moti/skeleton";
 
 export const History = ({
   navigation,

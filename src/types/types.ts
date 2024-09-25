@@ -41,6 +41,7 @@ export type settingsType = {
   data: {
     title: string;
     icon: ImageSourcePropType;
+    navigate: boolean;
     navigationScreen: string;
   }[];
 }[];
